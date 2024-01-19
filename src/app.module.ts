@@ -10,6 +10,8 @@ import { CategoryModule } from './category/category.module';
 import { Media } from './media/models/media.model';
 import { MediaModule } from './media/media.module';
 import { Category } from './category/models/category.model';
+import { CommentModule } from './comment/comment.module';
+import { Comment } from './comment/models/comment.model';
 
 @Module({
   imports: [
