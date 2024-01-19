@@ -13,6 +13,7 @@ import { Category } from './category/models/category.model';
 import { CommentModule } from './comment/comment.module';
 import { Comment } from './comment/models/comment.model';
 import { DiscountModule } from './discount/discount.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { DiscountModule } from './discount/discount.module';
     FilesModule,
     CategoryModule,
     DiscountModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],
