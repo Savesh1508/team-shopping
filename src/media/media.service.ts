@@ -1,7 +1,4 @@
 import {
-    BadRequestException,
-    HttpException,
-    HttpStatus,
     Injectable,
   } from '@nestjs/common';
   import { CreateMediaDto } from './dto/create-media.dto';
