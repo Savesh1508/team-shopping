@@ -5,6 +5,9 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
 import { CategoryModule } from './category/category.module';
+import { Media } from './media/models/media.model';
+import { MediaModule } from './media/media.module';
+import { Category } from './category/models/category.model';
 
 @Module({
   imports: [
@@ -26,6 +29,7 @@ import { CategoryModule } from './category/category.module';
       autoLoadModels: true,
       logging: false,
     }),
+    MediaModule,
     FilesModule,
     CategoryModule,
   ],
