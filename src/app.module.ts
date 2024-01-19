@@ -1,3 +1,5 @@
+import { CuponCode } from './cupon_code/models/cupon_code.model';
+import { CuponCodeModule } from './cupon_code/cupon_code.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -25,10 +27,15 @@ import { Category } from './category/models/category.model';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [],
+      models: [
+        CuponCode,
+        Category,
+        Media,
+      ],
       autoLoadModels: true,
       logging: false,
     }),
+    CuponCodeModule,
     MediaModule,
     FilesModule,
     CategoryModule,
