@@ -18,6 +18,8 @@ import { Basket } from './basket/models/basket.model';
 import { BasketModule } from './basket/basket.module';
 import { Discount } from './discount/models/discount.model';
 import { CommentModule } from './comment1/comment.module';
+import { BasketItems } from './basket_items/models/basketItems.model';
+import { BasketItemsModule } from './basket_items/basketItems.module';
 
 @Module({
   imports: [
@@ -42,7 +44,8 @@ import { CommentModule } from './comment1/comment.module';
         Basket,
         Discount,
         Product,
-        Comment1
+        Comment1,
+        BasketItems
       ],
       autoLoadModels: true,
       logging: false,
@@ -54,7 +57,8 @@ import { CommentModule } from './comment1/comment.module';
     ProductModule,
     BasketModule,
     DiscountModule,
-    CommentModule
+    CommentModule,
+    BasketItemsModule
   ],
   controllers: [],
   providers: [],
