@@ -7,9 +7,9 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
-  AllowNull,
 } from 'sequelize-typescript';
 import { Category } from '../../category/models/category.model';
+import { Store } from '../../store/models/store.model';
 
 interface ProductAttrs {
   name: string;
@@ -159,4 +159,7 @@ export class Product extends Model<Product, ProductAttrs> {
 
   @BelongsTo(() => Category)
   category: Category;
+
+  @HasMany(() => Store)
+  store: Store[];
 }

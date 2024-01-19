@@ -22,6 +22,8 @@ import { BasketItems } from './basket_items/models/basketItems.model';
 import { BasketItemsModule } from './basket_items/basketItems.module';
 import { UserAddress } from './user_address/models/userAddress.model';
 import { UserAddressModule } from './user_address/userAddress.module';
+import { StoreModule } from './store/store.module';
+import { Store } from './store/models/store.model';
 
 @Module({
   imports: [
@@ -49,7 +51,7 @@ import { UserAddressModule } from './user_address/userAddress.module';
         Comment1,
         BasketItems,
         UserAddress
-      ],
+      , Store],
       autoLoadModels: true,
       logging: false,
     }),
@@ -61,6 +63,7 @@ import { UserAddressModule } from './user_address/userAddress.module';
     BasketModule,
     DiscountModule,
     CommentModule,
+    StoreModule,,
     BasketItemsModule,
     UserAddressModule
   ],
