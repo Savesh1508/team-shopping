@@ -13,6 +13,8 @@ import { Category } from './category/models/category.model';
 import { CommentModule } from './comment/comment.module';
 import { Comment } from './comment/models/comment.model';
 import { DiscountModule } from './discount/discount.module';
+import { ProductModule } from './product/product.module';
+import { Product } from './product/models/product.model';
 
 @Module({
   imports: [
@@ -30,11 +32,7 @@ import { DiscountModule } from './discount/discount.module';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [
-        CuponCode,
-        Category,
-        Media,
-      ],
+      models: [CuponCode, Category, Media, Product, Comment],
       autoLoadModels: true,
       logging: false,
     }),
@@ -43,6 +41,8 @@ import { DiscountModule } from './discount/discount.module';
     FilesModule,
     CategoryModule,
     DiscountModule,
+    ProductModule,
+    CommentModule
   ],
   controllers: [],
   providers: [],
