@@ -10,8 +10,10 @@ import { CategoryModule } from './category/category.module';
 import { Media } from './media/models/media.model';
 import { MediaModule } from './media/media.module';
 import { Category } from './category/models/category.model';
-import { CommentModule } from './comment/comment.module';
-import { Comment } from './comment/models/comment.model';
+import { Comment1 } from './comment1/models/comment.model';
+import { CommentModule } from './comment1/comment.module';
+import { Basket } from './basket/models/basket.model';
+import { BasketModule } from './basket/basket.module';
 
 @Module({
   imports: [
@@ -29,11 +31,7 @@ import { Comment } from './comment/models/comment.model';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [
-        CuponCode,
-        Category,
-        Media,
-      ],
+      models: [CuponCode, Category, Media,Comment1,Basket],
       autoLoadModels: true,
       logging: false,
     }),
@@ -41,6 +39,8 @@ import { Comment } from './comment/models/comment.model';
     MediaModule,
     FilesModule,
     CategoryModule,
+    CommentModule,
+    BasketModule
   ],
   controllers: [],
   providers: [],
