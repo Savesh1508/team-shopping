@@ -12,6 +12,7 @@ import { MediaModule } from './media/media.module';
 import { Category } from './category/models/category.model';
 import { CommentModule } from './comment/comment.module';
 import { Comment } from './comment/models/comment.model';
+import { DiscountModule } from './discount/discount.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { Comment } from './comment/models/comment.model';
     MediaModule,
     FilesModule,
     CategoryModule,
+    DiscountModule,
   ],
   controllers: [],
   providers: [],
