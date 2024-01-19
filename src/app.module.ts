@@ -20,6 +20,8 @@ import { Discount } from './discount/models/discount.model';
 import { CommentModule } from './comment/comment.module';
 import { BasketItems } from './basket_items/models/basketItems.model';
 import { BasketItemsModule } from './basket_items/basketItems.module';
+import { UserAddress } from './user_address/models/userAddress.model';
+import { UserAddressModule } from './user_address/userAddress.module';
 
 @Module({
   imports: [
@@ -45,7 +47,8 @@ import { BasketItemsModule } from './basket_items/basketItems.module';
         Discount,
         Product,
         Comment1,
-        BasketItems
+        BasketItems,
+        UserAddress
       ],
       autoLoadModels: true,
       logging: false,
@@ -58,7 +61,8 @@ import { BasketItemsModule } from './basket_items/basketItems.module';
     BasketModule,
     DiscountModule,
     CommentModule,
-    BasketItemsModule
+    BasketItemsModule,
+    UserAddressModule
   ],
   controllers: [],
   providers: [],
