@@ -5,6 +5,7 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
 import { CategoryModule } from './category/category.module';
+import { DiscountModule } from './discount/discount.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { CategoryModule } from './category/category.module';
     }),
     FilesModule,
     CategoryModule,
+    DiscountModule,
   ],
   controllers: [],
   providers: [],
