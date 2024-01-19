@@ -13,7 +13,7 @@ interface CommentAttrs {
 }
 
 @Table({ tableName: 'Comment' })
-export class Comment extends Model<Comment, CommentAttrs> {
+export class Comment1 extends Model<Comment1, CommentAttrs> {
   @ApiProperty({ example: '1', description: 'Unikal ID' })
   @Column({
     type: DataType.INTEGER,

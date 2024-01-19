@@ -1,11 +1,19 @@
-import { Comment } from './models/comment.model';
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Comment1 } from './models/comment.model';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 
-@ApiTags('Comment')
+@ApiTags('Comment1')
 @Controller('comment')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
@@ -19,16 +27,16 @@ export class CommentController {
   @ApiResponse({
     status: 200,
     description: 'List of Comment',
-    type: [Comment],
+    type: [Comment1],
   })
   @Get('all')
-  async findAll(): Promise<Comment[]> {
+  async findAll(): Promise<Comment1[]> {
     return this.commentService.findAll();
   }
 
   @ApiOperation({ summary: 'Id Serach Comment' })
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Comment> {
+  async findOne(@Param('id') id: number): Promise<Comment1> {
     return this.commentService.findOne(id);
   }
 
@@ -37,7 +45,7 @@ export class CommentController {
   async update(
     @Param('id') id: number,
     @Body() updateCommentDto: UpdateCommentDto,
-  ): Promise<Comment> {
+  ): Promise<Comment1> {
     return this.commentService.update(id, updateCommentDto);
   }
 

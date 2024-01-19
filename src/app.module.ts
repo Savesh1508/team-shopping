@@ -10,11 +10,18 @@ import { CategoryModule } from './category/category.module';
 import { Media } from './media/models/media.model';
 import { MediaModule } from './media/media.module';
 import { Category } from './category/models/category.model';
-import { CommentModule } from './comment/comment.module';
-import { Comment } from './comment/models/comment.model';
 import { DiscountModule } from './discount/discount.module';
 import { ProductModule } from './product/product.module';
 import { Product } from './product/models/product.model';
+import { Comment1 } from './comment/models/comment.model';
+import { Basket } from './basket/models/basket.model';
+import { BasketModule } from './basket/basket.module';
+import { Discount } from './discount/models/discount.model';
+import { CommentModule } from './comment/comment.module';
+import { BasketItems } from './basket_items/models/basketItems.model';
+import { BasketItemsModule } from './basket_items/basketItems.module';
+import { UserAddress } from './user_address/models/userAddress.model';
+import { UserAddressModule } from './user_address/userAddress.module';
 import { StoreModule } from './store/store.module';
 import { Store } from './store/models/store.model';
 
@@ -34,7 +41,17 @@ import { Store } from './store/models/store.model';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [CuponCode, Category, Media, Product, Comment, Store],
+      models: [
+        CuponCode,
+        Category,
+        Media,
+        Basket,
+        Discount,
+        Product,
+        Comment1,
+        BasketItems,
+        UserAddress
+      , Store],
       autoLoadModels: true,
       logging: false,
     }),
@@ -42,10 +59,13 @@ import { Store } from './store/models/store.model';
     MediaModule,
     FilesModule,
     CategoryModule,
-    DiscountModule,
     ProductModule,
+    BasketModule,
+    DiscountModule,
     CommentModule,
-    StoreModule,
+    StoreModule,,
+    BasketItemsModule,
+    UserAddressModule
   ],
   controllers: [],
   providers: [],
