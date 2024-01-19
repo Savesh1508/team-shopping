@@ -21,6 +21,7 @@ import { resolve } from 'path';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
+      models: [],
       autoLoadModels: true,
       logging: false,
     }),
