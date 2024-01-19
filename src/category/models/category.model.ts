@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import { Product } from '../../product/models/product.model';
 
 interface CategoryAttrs {
   name: string;
@@ -42,4 +43,7 @@ export class Category extends Model<Category, CategoryAttrs> {
     type: DataType.STRING,
   })
   image: string;
+
+  @HasMany(() => Product)
+  product: Product[];
 }
