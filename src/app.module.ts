@@ -13,11 +13,11 @@ import { Category } from './category/models/category.model';
 import { DiscountModule } from './discount/discount.module';
 import { ProductModule } from './product/product.module';
 import { Product } from './product/models/product.model';
-import { Comment1 } from './comment1/models/comment.model';
+import { Comment1 } from './comment/models/comment.model';
 import { Basket } from './basket/models/basket.model';
 import { BasketModule } from './basket/basket.module';
 import { Discount } from './discount/models/discount.model';
-import { CommentModule } from './comment1/comment.module';
+import { CommentModule } from './comment/comment.module';
 import { BasketItems } from './basket_items/models/basketItems.model';
 import { BasketItemsModule } from './basket_items/basketItems.module';
 
