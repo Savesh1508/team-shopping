@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { resolve } from 'path';
       logging: false,
     }),
     FilesModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],
