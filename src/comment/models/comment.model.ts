@@ -52,7 +52,7 @@ export class Comment extends Model<Comment, CommentAttrs> {
 
   @ApiProperty({ example: '122345', description: 'Comment rated' })
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
   })
   rating: number;
