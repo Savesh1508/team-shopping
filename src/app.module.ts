@@ -14,7 +14,6 @@ import { CommentModule } from './comment/comment.module';
 import { Comment } from './comment/models/comment.model';
 import { DiscountModule } from './discount/discount.module';
 import { ProductModule } from './product/product.module';
-import { Category } from './category/models/category.model';
 import { Product } from './product/models/product.model';
 
 @Module({
@@ -33,11 +32,7 @@ import { Product } from './product/models/product.model';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [
-        CuponCode,
-        Category,
-        Media,
-      Category, Product],
+      models: [CuponCode, Category, Media, Product, Comment],
       autoLoadModels: true,
       logging: false,
     }),
@@ -47,6 +42,7 @@ import { Product } from './product/models/product.model';
     CategoryModule,
     DiscountModule,
     ProductModule,
+    CommentModule
   ],
   controllers: [],
   providers: [],
