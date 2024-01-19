@@ -1,3 +1,5 @@
+import { CuponCode } from './cupon_code/models/cupon_code.model';
+import { CuponCodeModule } from './cupon_code/cupon_code.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -5,6 +7,12 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
 import { CategoryModule } from './category/category.module';
+import { Media } from './media/models/media.model';
+import { MediaModule } from './media/media.module';
+import { Category } from './category/models/category.model';
+import { CommentModule } from './comment/comment.module';
+import { Comment } from './comment/models/comment.model';
+import { DiscountModule } from './discount/discount.module';
 import { ProductModule } from './product/product.module';
 import { Category } from './category/models/category.model';
 import { Product } from './product/models/product.model';
@@ -25,12 +33,19 @@ import { Product } from './product/models/product.model';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [Category, Product],
+      models: [
+        CuponCode,
+        Category,
+        Media,
+      Category, Product],
       autoLoadModels: true,
       logging: false,
     }),
+    CuponCodeModule,
+    MediaModule,
     FilesModule,
     CategoryModule,
+    DiscountModule,
     ProductModule,
   ],
   controllers: [],
