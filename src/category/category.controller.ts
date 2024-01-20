@@ -13,6 +13,7 @@ import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Category } from './models/category.model';
+import { FindCategoryDto } from './dto/find-category.dto';
 
 @ApiTags('Category')
 @Controller('category')
@@ -50,5 +51,11 @@ export class CategoryController {
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.categoryService.deleteById(+id);
+  }
+
+  @ApiOperation({ summary: 'Search category' })
+  @Post('search')
+  search(@Body() findCategoryDto: FindCategoryDto) {
+    return this.categoryService.search(findCategoryDto);
   }
 }

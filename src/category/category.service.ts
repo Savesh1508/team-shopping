@@ -9,6 +9,8 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Category } from './models/category.model';
 import { FilesService } from '../files/files.service';
+import { FindCategoryDto } from './dto/find-category.dto';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class CategoryService {
@@ -65,5 +67,19 @@ export class CategoryService {
     }
 
     return this.fileService.removeFile(post.image);
+  }
+
+  async search(findCategoryDto: FindCategoryDto) {
+    const where = {};
+    if (findCategoryDto.name) {
+      where['name'] = {
+        [Op.like]: `%${findCategoryDto.name}%`,
+      };
+    }
+    const category = await Category.findAll({ where });
+    if (!category) {
+      throw new BadRequestException('category not found');
+    }
+    return category;
   }
 }

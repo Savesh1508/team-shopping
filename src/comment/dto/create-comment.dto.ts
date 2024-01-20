@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString ,IsEmail, IsDate, IsNumber, IsBoolean} from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsEmail,
+  IsDate,
+  IsNumber,
+  IsBoolean,
+} from 'class-validator';
 
 export class CreateCommentDto {
   @ApiProperty({
@@ -34,7 +41,7 @@ export class CreateCommentDto {
   text: string;
 
   @ApiProperty({
-    example: "12234",
+    example: '12234',
     description: 'Comment rating',
   })
   @IsNotEmpty()
@@ -42,18 +49,16 @@ export class CreateCommentDto {
   rating: number;
 
   @ApiProperty({
-    example: "true",
+    example: 'true',
     description: 'Comment is_active',
   })
   @IsNotEmpty()
   @IsBoolean()
   is_active: boolean;
 
- 
   @ApiProperty({ example: '1', description: 'Product id' })
   product_id: number;
 
-  
   @ApiProperty({ example: '1', description: 'User id' })
   user_id: number;
 }
