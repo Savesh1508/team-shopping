@@ -24,6 +24,7 @@ import { UserAddress } from './user_address/models/userAddress.model';
 import { UserAddressModule } from './user_address/userAddress.module';
 import { StoreModule } from './store/store.module';
 import { Store } from './store/models/store.model';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { Store } from './store/models/store.model';
     StoreModule,,
     BasketItemsModule,
     UserAddressModule
+    AdminModule,
   ],
   controllers: [],
   providers: [],
