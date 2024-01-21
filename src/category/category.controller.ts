@@ -7,6 +7,7 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CategoryService } from './category.service';
@@ -55,7 +56,7 @@ export class CategoryController {
 
   @ApiOperation({ summary: 'Search category' })
   @Post('search')
-  search(@Body() findCategoryDto: FindCategoryDto) {
-    return this.categoryService.search(findCategoryDto);
+  search(@Query("name") name: string) {
+    return this.categoryService.search(name);
   }
 }
