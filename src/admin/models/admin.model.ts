@@ -15,7 +15,7 @@ interface AdminAttrs {
 
 }
 
-@Table({ tableName: 'admin' })
+@Table({ tableName: 'Admin' })
 export class Admin extends Model<Admin, AdminAttrs> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({

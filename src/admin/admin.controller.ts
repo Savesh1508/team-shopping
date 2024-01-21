@@ -24,7 +24,7 @@ import { NUMBER } from 'sequelize';
 import { AdminGuard } from '../guards/admin.guard';
 import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { SuperAdminGuard } from '../guards/superAdmin.guard';
-import { selfAdminGuard } from '../guards/selfAdmin.guards';
+import { selfAdminGuard } from '../guards/selfAdmin.guard';
 
 @ApiTags('Admin')
 @Controller('admin')

@@ -1,3 +1,5 @@
+import { Admin } from 'src/admin/models/admin.model';
+import { UserRoles } from './roles/models/user-roles.model';
 import { CuponCode } from './cupon_code/models/cupon_code.model';
 import { CuponCodeModule } from './cupon_code/cupon_code.module';
 import { Module } from '@nestjs/common';
@@ -29,6 +31,9 @@ import { discountProduct } from './discount_product/models/discountProduct.model
 import { discountProductModule } from './discount_product/discountProduct.module';
 import { OrderModule } from './order/order.module';
 import { Order } from './order/models/order.model';
+import { Role } from './roles/models/role.model';
+import { AdminRoles } from './roles/models/admin-roles.model';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -47,6 +52,7 @@ import { Order } from './order/models/order.model';
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
       models: [
+        Admin,
         CuponCode,
         Category,
         Media,
@@ -59,6 +65,9 @@ import { Order } from './order/models/order.model';
         Store,
         discountProduct,
         Order,
+        Role,
+        UserRoles,
+        AdminRoles,
       ],
       autoLoadModels: true,
       logging: false,
@@ -77,6 +86,7 @@ import { Order } from './order/models/order.model';
     AdminModule,
     discountProductModule,
     OrderModule,
+    RolesModule
   ],
   controllers: [],
   providers: [],
