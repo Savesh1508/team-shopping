@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import { Order } from 'src/order/models/order.model';
 
 interface userAddressAttrs {
   address_name: string;
@@ -78,4 +79,7 @@ export class UserAddress extends Model<UserAddress, userAddressAttrs> {
     allowNull: false,
   })
   floor: string;
+  
+  @HasMany(() => Order)
+  order: Order[];
 }

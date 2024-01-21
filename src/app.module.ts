@@ -25,6 +25,10 @@ import { UserAddressModule } from './user_address/userAddress.module';
 import { StoreModule } from './store/store.module';
 import { Store } from './store/models/store.model';
 import { AdminModule } from './admin/admin.module';
+import { discountProduct } from './discount_product/models/discountProduct.model';
+import { discountProductModule } from './discount_product/discountProduct.module';
+import { OrderModule } from './order/order.module';
+import { Order } from './order/models/order.model';
 
 @Module({
   imports: [
@@ -51,8 +55,11 @@ import { AdminModule } from './admin/admin.module';
         Product,
         Comment1,
         BasketItems,
-        UserAddress
-      , Store],
+        UserAddress,
+        Store,
+        discountProduct,
+        Order,
+      ],
       autoLoadModels: true,
       logging: false,
     }),
@@ -64,10 +71,12 @@ import { AdminModule } from './admin/admin.module';
     BasketModule,
     DiscountModule,
     CommentModule,
-    StoreModule,,
+    StoreModule,
     BasketItemsModule,
-    UserAddressModule
+    UserAddressModule,
     AdminModule,
+    discountProductModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],

@@ -18,7 +18,7 @@ import {
     }
   
     async findAll(): Promise<UserAddress[]> {
-      return this.userAddressRepository.findAll();
+      return this.userAddressRepository.findAll({ include: { all: true } });
     }
   
     async findOne(id: number): Promise<UserAddress> {

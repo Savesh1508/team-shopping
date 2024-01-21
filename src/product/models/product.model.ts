@@ -10,6 +10,10 @@ import {
 } from 'sequelize-typescript';
 import { Category } from '../../category/models/category.model';
 import { Store } from '../../store/models/store.model';
+import { discountProduct } from 'src/discount_product/models/discountProduct.model';
+import { BasketItems } from 'src/basket_items/models/basketItems.model';
+import { Media } from 'src/media/models/media.model';
+import { Comment1 } from 'src/comment/models/comment.model';
 
 interface ProductAttrs {
   name: string;
@@ -162,4 +166,17 @@ export class Product extends Model<Product, ProductAttrs> {
 
   @HasMany(() => Store)
   store: Store[];
+
+  @HasMany(() => discountProduct)
+  discount_product: discountProduct[];
+
+  @HasMany(() => BasketItems)
+  basketItems: BasketItems[];
+
+  @HasMany(() => Media)
+  media: Media[];
+
+  @HasMany(() => Comment1)
+  comment: Comment1[];
+ 
 }

@@ -1,5 +1,6 @@
 import { Model, Table, Column, DataType, HasMany } from "sequelize-typescript";
 import { ApiProperty } from "@nestjs/swagger";
+import { Order } from "src/order/models/order.model";
 
 interface CuponCodeAttributes{
   name:string;
@@ -36,4 +37,7 @@ export class CuponCode extends Model<CuponCode, CuponCodeAttributes> {
     type: DataType.DATEONLY,
   })
   end_date: Date;
+
+  @HasMany(() => Order)
+  order: Order[];
 }

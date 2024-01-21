@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Product } from 'src/product/models/product.model';
 
 interface CommentAttrs {
   name: string;
@@ -63,4 +64,14 @@ export class Comment1 extends Model<Comment1, CommentAttrs> {
     allowNull: false,
   })
   is_active: boolean;
+
+  @ForeignKey(() => Product)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  product_id: number;
+
+  @BelongsTo(() => Product)
+  product: Product;
 }
