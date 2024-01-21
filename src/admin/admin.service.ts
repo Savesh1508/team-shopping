@@ -13,7 +13,6 @@ import * as bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 import { Response } from 'express';
 import { LoginAdminDto } from './dto/login-admin.dto';
-import { FindAdminDto } from './dto/find-admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -158,24 +157,26 @@ export class AdminService {
     return response;
   }
 
-  async Search(findAdminDto: FindAdminDto) {
+  async  SearchAdmin({ name, last_name, email} ) {
     let where = {};
-    if (findAdminDto.email) {
-      where['email'] = { [Op.like]: `%${findAdminDto.email}%` };
+    
+    if (name) {
+      where['first_name'] = { [Op.like]: `%${name}%` };
     }
 
-    if (findAdminDto.phone) {
-      where['phone'] = { [Op.like]: `%${findAdminDto.phone}%` };
+    if (email) {
+      where['email'] = { [Op.like]: `%${email}%` };
     }
 
-    if (findAdminDto.first_name) {
-      where['first_name'] = { [Op.like]: `%${findAdminDto.first_name}%` };
+    if (last_name) {
+      where['last_name'] = { [Op.like]: `%${last_name}%` };
     }
 
     const admin = await this.adminRepo.findAll({ where });
     if (!admin) {
       throw new BadRequestException('admin not found');
     }
+
     return admin;
   }
 
