@@ -5,7 +5,6 @@ import { Admin } from "../admin/models/admin.model";
 @Injectable()
 export class selfAdminGuard implements CanActivate {
     constructor(private readonly jwtService: JwtService) {}
-    
     canActivate(context: ExecutionContext){
         const req = context.switchToHttp().getRequest();
         const authHeader = req.headers.authorization;
