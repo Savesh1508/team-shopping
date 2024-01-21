@@ -1,14 +1,15 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Product } from './models/product.model';
-import { FindProductDto } from './dto/find-product.dto';
 import { Op } from 'sequelize';
+import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel(Product) private productRepo: typeof Product) {}
+  constructor(@InjectModel(Product) private productRepo: typeof Product,
+  ) {}
 
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     const product = await this.productRepo.create(createProductDto);
@@ -41,26 +42,56 @@ export class ProductService {
     return product[1][0];
   }
 
-  async search(findProductDto: FindProductDto) {
+  
+  // async removeFile(id: number) {
+  //   const post = await this.productRepo.findOne({ where: { id } });
+
+  //   if (!post) {
+  //     throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+  //   }
+
+  //   return this.filesService.removeFile(post.);
+  // }
+
+  // async updateImage(id: number, image: any) {
+  //   const removeFile = await this.removeFile(id);
+  //   console.log('remove', removeFile);
+
+  //   if (!removeFile) {
+  //     throw new BadRequestException("Don't remove image");
+  //   }
+
+  //   const createFile = await this.filesService.createFile(image);
+  //   const updateFile = await this.productRepo.update(
+  //     {
+  //       image: createFile,
+  //     },
+  //     { where: { id }, returning: true },
+  //   );
+  //   return updateFile;
+  // }
+
+  async search({name, price, qr_code, brand}) {
     const where = {};
-    if (findProductDto.name) {
+
+    if (name) {
       where['name'] = {
-        [Op.like]: `%${findProductDto.name}%`,
+        [Op.like]: `%${name}%`,
       };
     }
-    if (findProductDto.price) {
+    if (price) {
       where['price'] = {
-        [Op.like]: `%${findProductDto.price}%`,
+        [Op.like]: `%${price}%`,
       };
     }
-    if (findProductDto.qr_code) {
+    if (qr_code) {
       where['qr_code'] = {
-        [Op.like]: `%${findProductDto.qr_code}%`,
+        [Op.like]: `%${qr_code}%`,
       };
     }
-    if (findProductDto.brand) {
+    if (brand) {
       where['brand'] = {
-        [Op.like]: `%${findProductDto.brand}%`,
+        [Op.like]: `%${brand}%`,
       };
     }
     const product = await Product.findAll({ where });

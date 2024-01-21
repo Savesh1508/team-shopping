@@ -11,6 +11,7 @@ import {
   HttpStatus,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -19,7 +20,6 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Admin } from './models/admin.model';
 import { Response } from 'express';
 import { LoginAdminDto } from './dto/login-admin.dto';
-import { FindAdminDto } from './dto/find-admin.dto';
 import { NUMBER } from 'sequelize';
 import { AdminGuard } from '../guards/admin.guard';
 import { CookieGetter } from '../decorators/cookieGetter.decorator';
@@ -88,10 +88,15 @@ export class AdminController {
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
   @UseGuards(SuperAdminGuard)
-  @Post('find')
-  findAllFilter(@Body() findAdminDto: FindAdminDto) {
-    return this.adminService.Search(findAdminDto);
+  @Get('search')
+  findAllFilter(
+    @Query('name') name: string,
+    @Query('last_name') last_name: string,
+    @Query('email') email: string,
+  ) {
+    return this.adminService.SearchAdmin({ name, last_name, email} );
   }
+
 
   @ApiOperation({ summary: 'Update by id yourself' })
   @ApiResponse({ status: 201, type: Admin })

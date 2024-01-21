@@ -69,16 +69,17 @@ export class CategoryService {
     return this.fileService.removeFile(post.image);
   }
 
-  async search(findCategoryDto: FindCategoryDto) {
+  async search(name: string) {
     const where = {};
-    if (findCategoryDto.name) {
+
+    if (name) {
       where['name'] = {
-        [Op.like]: `%${findCategoryDto.name}%`,
+        [Op.like]: `%${name}%`,
       };
     }
     const category = await Category.findAll({ where });
     if (!category) {
-      throw new BadRequestException('category not found');
+      throw new BadRequestException('Category not found');
     }
     return category;
   }
