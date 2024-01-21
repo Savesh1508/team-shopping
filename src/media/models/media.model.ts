@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Product } from 'src/product/models/product.model';
 
 interface MediaAttrs {
   media_link: string;
@@ -22,5 +23,15 @@ export class Media extends Model<Media, MediaAttrs> {
     allowNull: false,
   })
   media_link: string;
+
+  @ForeignKey(() => Product)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  product_id: number;
+
+  @BelongsTo(() => Product)
+  product: Product;
 
 }

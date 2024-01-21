@@ -18,7 +18,7 @@ import {
     }
   
     async findAll(): Promise<Media[]> {
-      return this.mediaRepository.findAll();
+      return this.mediaRepository.findAll({ include: { all: true } });
     }
   
     async findOne(id: number): Promise<Media> {

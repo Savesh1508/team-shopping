@@ -18,7 +18,7 @@ import {
     }
   
     async findAll(): Promise<Basket[]> {
-      return this.basketRepository.findAll();
+      return this.basketRepository.findAll({ include: { all: true } });
     }
   
     async findOne(id: number): Promise<Basket> {

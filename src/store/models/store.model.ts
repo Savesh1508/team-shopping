@@ -11,6 +11,7 @@ import { Product } from '../../product/models/product.model';
 
 interface StoreAttrs {
   addCount: number;
+  product_id: number;
 }
 
 @Table({ tableName: 'Store' })
