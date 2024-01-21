@@ -10,6 +10,7 @@ import {
   HttpCode,
   HttpStatus,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -20,6 +21,10 @@ import { Response } from 'express';
 import { LoginAdminDto } from './dto/login-admin.dto';
 import { FindAdminDto } from './dto/find-admin.dto';
 import { NUMBER } from 'sequelize';
+import { AdminGuard } from '../guards/admin.guard';
+import { CookieGetter } from '../decorators/cookieGetter.decorator';
+import { SuperAdminGuard } from '../guards/superAdmin.guard';
+import { selfAdminGuard } from '../guards/selfAdmin.guards';
 
 @ApiTags('Admin')
 @Controller('admin')
@@ -47,33 +52,34 @@ export class AdminController {
     return this.adminService.login(loginAdminDto, res);
   }
 
-  // @ApiOperation({ summary: 'Logout Admin' })
-  // @ApiResponse({ status: 200, type: Admin })
-  // @HttpCode(HttpStatus.OK)
-  // // @UseGuards(AdminGuard)
-  // @Post('signout')
-  // logout(
-  //   // @CookieGetter('refresh_token') refreshToken: string,
-  //   @Res({ passthrough: true }) res: Response,
-  // ) {
-  //   return this.adminService.logout(refreshToken, res);
-  // }
+  @ApiOperation({ summary: 'Logout Admin' })
+  @ApiResponse({ status: 200, type: Admin })
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AdminGuard)
+  @Post('signout')
+  logout(
+    @CookieGetter('refresh_token') refreshToken: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.adminService.logout(refreshToken, res);
+  }
 
-  // @ApiOperation({ summary: 'RefreshToken Admin' })
-  // @ApiResponse({ status: 200, type: Admin })
-  // @HttpCode(HttpStatus.OK)
-  // @Post(':id/refresh')
-  // refresh(
-  //   @Param('id') id: string,
-  //   @CookieGetter('refresh_token') refreshToken: string,
-  //   @Res({ passthrough: true }) res: Response,
-  // ) {
-  //   return this.adminService.refreshToken(+id, refreshToken, res);
-  // }
+  @ApiOperation({ summary: 'RefreshToken Admin' })
+  @ApiResponse({ status: 200, type: Admin })
+  @HttpCode(HttpStatus.OK)
+  @Post(':id/refresh')
+  refresh(
+    @Param('id') id: string,
+    @CookieGetter('refresh_token') refreshToken: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.adminService.refreshToken(+id, refreshToken, res);
+  }
 
   @ApiOperation({ summary: 'All Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @Get('all')
+  @UseGuards(SuperAdminGuard)
   findAll() {
     return this.adminService.findAllAdmin();
   }
@@ -81,7 +87,7 @@ export class AdminController {
   @ApiOperation({ summary: 'Search Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
-  // @UseGuards(SuperAdminGuard)
+  @UseGuards(SuperAdminGuard)
   @Post('find')
   findAllFilter(@Body() findAdminDto: FindAdminDto) {
     return this.adminService.Search(findAdminDto);
@@ -90,7 +96,7 @@ export class AdminController {
   @ApiOperation({ summary: 'Update by id yourself' })
   @ApiResponse({ status: 201, type: Admin })
   @HttpCode(HttpStatus.OK)
-  // @UseGuards(selfAdminGuard)
+  @UseGuards(selfAdminGuard)
   @Put('yourself/:id')
   update(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
     return this.adminService.updateYourself(+id, updateAdminDto);
@@ -99,6 +105,7 @@ export class AdminController {
   @ApiOperation({ summary: 'Update by id by Admin' })
   @ApiResponse({ status: 201, type: Admin })
   @HttpCode(HttpStatus.OK)
+  @UseGuards(SuperAdminGuard)
   @Put('update/:id')
   updateAdmin(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
     return this.adminService.updateYourself(+id, updateAdminDto);
@@ -107,6 +114,7 @@ export class AdminController {
   @ApiOperation({ summary: 'find One by Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
+  @UseGuards(SuperAdminGuard)
   @Get('findOne/:id')
   findOne(@Param('id') id: string) {
     return this.adminService.findByAdmin(+id);
@@ -114,6 +122,7 @@ export class AdminController {
 
   @ApiOperation({ summary: 'delete by id by Admin' })
   @ApiResponse({ status: 200, type: NUMBER })
+  @UseGuards(SuperAdminGuard)
   @Delete('remove/:id')
   remove(@Param('id') id: string) {
     return this.adminService.removeByAdmin(+id);

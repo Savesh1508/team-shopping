@@ -36,7 +36,7 @@ export class AdminService {
       }),
       this.jwtService.signAsync(jwtPlayload, {
         secret: process.env.REFRESH_TOKEN_KEY,
-        expiresIn: process.env.REFRESH_TOKEN_KEY_TIME,
+        expiresIn: process.env.REFRESH_TOKEN_TIME,
       }),
     ]);
 
@@ -68,6 +68,8 @@ export class AdminService {
     console.log('newAdmin', newAdmin);
 
     const token = await this.getTokens(newAdmin);
+    console.log("token=", token);
+    
     const hashed_refresh_token = await bcrypt.hash(token.refresh_token, 7);
 
     const updateAdmin = await this.adminRepo.update(
