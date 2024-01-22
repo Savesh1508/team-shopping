@@ -15,7 +15,7 @@ export class RoleController {
 
   @ApiOperation({summary:"Create role"})
   @ApiResponse({status: 200, description: 'New role', type: [Role]})
-  @Post()
+  @Post('create')
   async createRole(@Body() createRoleDto: CreateRoleDto){
     const role = await this.roleService.createRole(createRoleDto);
     return role;
@@ -23,7 +23,7 @@ export class RoleController {
 
   @ApiOperation({summary:"Get all roles"})
   @ApiResponse({status: 200, description: 'All roles', type: [Role]})
-  @Get()
+  @Get('all')
   async getAllRoles():Promise<Role[]>{
     const roles = await this.roleService.getAllRoles();
     return roles;
