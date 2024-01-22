@@ -18,7 +18,7 @@ import { Comment1 } from 'src/comment/models/comment.model';
 interface ProductAttrs {
   name: string;
   price: string;
-  decsription: string;
+  description: string;
   total_count: number;
   mfg: string;
   life: string;
