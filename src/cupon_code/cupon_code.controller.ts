@@ -16,7 +16,7 @@ export class CuponCodeController {
   constructor(private readonly cuponCodeService: CuponCodeService) {}
   @ApiOperation({summary:"Create cupon code"})
   @ApiResponse({status: 200, description: 'New cupon code', type: [CuponCode]})
-  @Post()
+  @Post('create')
   async createCuponCode(@Body() createCuponCodeDto: CreateCuponCodeDto):Promise<CuponCode>{
     const cupon_code = await this.cuponCodeService.createCuponCode(createCuponCodeDto);
     return cupon_code;
@@ -24,7 +24,7 @@ export class CuponCodeController {
 
   @ApiOperation({summary:"Get all cupon codes"})
   @ApiResponse({status: 200, description: 'List of cupon codes', type: [CuponCode]})
-  @Get()
+  @Get('all')
   async getAllCuponCodes():Promise<CuponCode[]>{
     const cupon_codes = await this.cuponCodeService.getAllCuponCodes();
     return cupon_codes;
