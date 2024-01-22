@@ -1,10 +1,9 @@
-import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Product } from './models/product.model';
 import { Op } from 'sequelize';
-import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class ProductService {
@@ -43,33 +42,6 @@ export class ProductService {
   }
 
   
-  // async removeFile(id: number) {
-  //   const post = await this.productRepo.findOne({ where: { id } });
-
-  //   if (!post) {
-  //     throw new HttpException('Not found', HttpStatus.NOT_FOUND);
-  //   }
-
-  //   return this.filesService.removeFile(post.);
-  // }
-
-  // async updateImage(id: number, image: any) {
-  //   const removeFile = await this.removeFile(id);
-  //   console.log('remove', removeFile);
-
-  //   if (!removeFile) {
-  //     throw new BadRequestException("Don't remove image");
-  //   }
-
-  //   const createFile = await this.filesService.createFile(image);
-  //   const updateFile = await this.productRepo.update(
-  //     {
-  //       image: createFile,
-  //     },
-  //     { where: { id }, returning: true },
-  //   );
-  //   return updateFile;
-  // }
 
   async search({name, price, qr_code, brand}) {
     const where = {};
