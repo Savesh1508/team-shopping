@@ -66,14 +66,6 @@ export class ProductController {
     return this.productService.updateById(+id, updateProductDto);
   }
 
-  // @ApiOperation({ summary: 'Rasm update qilish' })
-  // @ApiResponse({ status: 201, description: 'update by id image', type: [Post] })
-  // @HttpCode(HttpStatus.OK)
-  // @Put('file/:id')
-  // @UseInterceptors(FileInterceptor('image'))
-  // updateFile(@Param('id') id: string, @UploadedFile() image: any) {
-  //   return this.productService.updateImage(+id, image);
-  // }
 
   @ApiOperation({ summary: 'Search product' })
   @Get('search')
