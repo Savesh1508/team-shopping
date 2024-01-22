@@ -25,6 +25,12 @@ import { UserAddressModule } from './user_address/userAddress.module';
 import { StoreModule } from './store/store.module';
 import { Store } from './store/models/store.model';
 import { AdminModule } from './admin/admin.module';
+import { Admin } from './admin/models/admin.model';
+import { UserModule } from './user/user.module';
+import { OtpModule } from './otp/otp.module';
+import { SmsModule } from './sms/sms.module';
+import { User } from './user/models/user.model';
+import { Otp } from './otp/model/otp.model';
 
 @Module({
   imports: [
@@ -51,8 +57,12 @@ import { AdminModule } from './admin/admin.module';
         Product,
         Comment1,
         BasketItems,
-        UserAddress
-      , Store],
+        UserAddress,
+        Store,
+        Admin,
+        User,
+        Otp,
+      ],
       autoLoadModels: true,
       logging: false,
     }),
@@ -64,10 +74,13 @@ import { AdminModule } from './admin/admin.module';
     BasketModule,
     DiscountModule,
     CommentModule,
-    StoreModule,,
+    StoreModule,
     BasketItemsModule,
-    UserAddressModule
+    UserAddressModule,
     AdminModule,
+    UserModule,
+    OtpModule,
+    SmsModule,
   ],
   controllers: [],
   providers: [],

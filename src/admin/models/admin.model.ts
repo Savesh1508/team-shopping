@@ -1,18 +1,16 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 
-
 interface AdminAttrs {
   last_name: string;
-  first_name:string,
-  phone:string,
-  address: string,
+  first_name: string;
+  phone: string;
+  address: string;
   password: string;
   email: string;
   is_active: boolean;
   hashed_refresh_token: string;
-  is_superAdmin:boolean
-
+  is_superAdmin: boolean;
 }
 
 @Table({ tableName: 'admin' })
@@ -25,7 +23,6 @@ export class Admin extends Model<Admin, AdminAttrs> {
   })
   id: number;
 
-  
   @ApiProperty({ example: 'John', description: 'Admin ismi' })
   @Column({
     type: DataType.STRING,
@@ -37,7 +34,6 @@ export class Admin extends Model<Admin, AdminAttrs> {
     type: DataType.STRING,
   })
   last_name: string;
-
 
   @ApiProperty({ example: 'admin@mail.uz', description: 'Admin email' })
   @Column({
@@ -58,7 +54,6 @@ export class Admin extends Model<Admin, AdminAttrs> {
   })
   address: string;
 
-  
   @ApiProperty({
     example: '+998881112233',
     description: 'Admin telefon nomeri',
@@ -70,7 +65,7 @@ export class Admin extends Model<Admin, AdminAttrs> {
 
   @ApiProperty({
     example: 'ture',
-    description: 'Admin super adminmi yoki yo\'q',
+    description: "Admin super adminmi yoki yo'q",
   })
   @Column({
     type: DataType.STRING,
