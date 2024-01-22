@@ -8,7 +8,7 @@ interface OrderAttrs {
   phone: string;
   order_date: Date;
   created_at: Date;
-  status: string;
+  status: boolean;
   payment_type: string;
 
   userAddres_id: number;
