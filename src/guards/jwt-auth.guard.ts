@@ -33,7 +33,6 @@ export class JwtAuthGuard implements CanActivate {
     let user: any;
     try {
       user = this.jwtService.verify(token);
-      console.log(user);
     } catch (error) {
       throw new UnauthorizedException({
         message: 'You are not registered!',

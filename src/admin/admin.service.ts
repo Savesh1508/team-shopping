@@ -63,9 +63,6 @@ export class AdminService {
       ...createAdminDto,
       password: hashed_password,
     });
-
-    console.log('newAdmin', newAdmin);
-
     const token = await this.getTokens(newAdmin);
     console.log('token=', token);
 
