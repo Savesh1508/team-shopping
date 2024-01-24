@@ -20,7 +20,7 @@ export class User extends Model<User, UserAttrs> {
   @ApiProperty({ example: 'Nabiev Ali', description: 'User`s phone number' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   full_name: string;
 
@@ -39,7 +39,7 @@ export class User extends Model<User, UserAttrs> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   hashed_refresh_token: string;
 

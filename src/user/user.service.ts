@@ -130,6 +130,8 @@ export class UserService {
 
   async newOTP(createUserDto: CreateUserDto) {
     const phone = createUserDto.phone;
+    await this.userRepo.create(createUserDto)
+   
     const otp = otpGenerator.generate(4, {
       upperCaseAlphabets: false,
       lowerCaseAlphabets: false,
@@ -154,6 +156,7 @@ export class UserService {
       expiration_time,
       phone: phone,
     });
+
     const details = {
       timestamp: now,
       phone: phone,
@@ -183,6 +186,9 @@ export class UserService {
             const user = await this.userRepo.findOne({
               where: { phone: phone },
             });
+            
+            console.log("--", user);
+              
             if (user) {
               const updatedUser = await this.userRepo.update(
                 { phone: phone },
