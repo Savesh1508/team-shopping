@@ -77,8 +77,8 @@ export class AdminController {
 
   @ApiOperation({ summary: 'All Admin' })
   @ApiResponse({ status: 200, type: Admin })
-  @Get('all')
   @UseGuards(SuperAdminGuard)
+  @Get('all')
   findAll() {
     return this.adminService.findAllAdmin();
   }

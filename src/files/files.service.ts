@@ -25,8 +25,6 @@ export class FilesService {
   }
 
   async removeFile(photoUrl: string) {
-    console.log(process.cwd() + '/dist/static/');
-
     fs.unlinkSync(process.cwd() + '/dist/static/' + photoUrl);
     return true;
   }

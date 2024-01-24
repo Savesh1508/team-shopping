@@ -7,12 +7,14 @@ import {
   Delete,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './models/product.model';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Product')
 @Controller('product')
@@ -21,6 +23,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Add Product' })
   @ApiResponse({ status: 200, description: 'New  Product', type: [Product] })
+  @UseGuards(AdminGuard)
   @Post('create')
   async createProduct(
     @Body() createProductDto: CreateProductDto,
@@ -48,6 +51,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Delete Product' })
   @ApiResponse({ status: 200, description: 'Deleted Product', type: [Product] })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.productService.deleteById(+id);
@@ -55,6 +59,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Product edit' })
   @ApiResponse({ status: 200, description: 'Updated Product', type: [Product] })
+  @UseGuards(AdminGuard)
   @Put(':id')
   async updateById(
     @Param('id') id: string,

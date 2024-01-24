@@ -9,6 +9,7 @@ import {
   HttpCode,
   HttpStatus,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -18,6 +19,8 @@ import { User } from './models/user.model';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { Response } from 'express';
+import { AdminGuard } from '../guards/admin.guard';
+import { selfClientGuard } from '../guards/selfClient.guard';
 
 @ApiTags('User')
 @Controller('user')
@@ -25,8 +28,11 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('otp')
-  newOtp(@Body() createUserDto: CreateUserDto) {
-    return this.userService.newOTP(createUserDto);
+  newOtp(
+    @Body() createUserDto: CreateUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.userService.newOTP(createUserDto, res);
   }
 
   @Post('verify')
@@ -46,6 +52,7 @@ export class UserController {
   }
 
   @ApiOperation({ summary: 'Search user' })
+  @UseGuards(AdminGuard)
   @Get('search')
   search(@Query('full_name') full_name: string, @Query('phone') phone: string) {
     return this.userService.search({ full_name, phone });
@@ -65,6 +72,7 @@ export class UserController {
   @ApiOperation({ summary: 'Update user self' })
   @ApiResponse({ status: 201, type: User })
   @HttpCode(HttpStatus.OK)
+  @UseGuards(selfClientGuard)
   @Put('update/:id')
   updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.updateUser(+id, updateUserDto);
