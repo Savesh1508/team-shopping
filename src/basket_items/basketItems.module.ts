@@ -7,7 +7,7 @@ import { Product } from 'src/product/models/product.model';
 import { Basket } from 'src/basket/models/basket.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([BasketItems,Product,Basket])],
+  imports: [SequelizeModule.forFeature([BasketItems, Product, Basket])],
   controllers: [BasketItemsController],
   providers: [BasketItemsService],
   exports: [BasketItemsService],

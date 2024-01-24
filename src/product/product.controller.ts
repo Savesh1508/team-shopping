@@ -20,6 +20,7 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @ApiOperation({ summary: 'Add Product' })
+  @ApiResponse({ status: 200, description: 'New  Product', type: [Product] })
   @Post('create')
   async createProduct(
     @Body() createProductDto: CreateProductDto,
@@ -46,12 +47,14 @@ export class ProductController {
   }
 
   @ApiOperation({ summary: 'Delete Product' })
+  @ApiResponse({ status: 200, description: 'Deleted Product', type: [Product] })
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.productService.deleteById(+id);
   }
 
   @ApiOperation({ summary: 'Product edit' })
+  @ApiResponse({ status: 200, description: 'Updated Product', type: [Product] })
   @Put(':id')
   async updateById(
     @Param('id') id: string,

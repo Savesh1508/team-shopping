@@ -64,7 +64,7 @@ export class Admin extends Model<Admin, AdminAttrs> {
   phone: string;
 
   @ApiProperty({
-    example: 'true',
+    example: 'ture',
     description: "Admin super adminmi yoki yo'q",
   })
   @Column({

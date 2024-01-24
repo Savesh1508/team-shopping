@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsDate, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsDate, IsBoolean, IsNumber } from 'class-validator';
 
 export class CreateBasketDto {
   @ApiProperty({
@@ -19,5 +19,6 @@ export class CreateBasketDto {
   status: boolean;
 
   @ApiProperty({ example: '1', description: 'User id' })
+  @IsNumber()
   user_id: number;
 }

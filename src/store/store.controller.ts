@@ -19,6 +19,7 @@ import { UpdateStoreDto } from './dto/update-store.dto';
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
   @ApiOperation({ summary: 'Add Product`s count' })
+  @ApiResponse({ status: 200, description: 'New  Store', type: [Store] })
   @Post('create')
   async createStore(@Body() createStoreDto: CreateStoreDto): Promise<Store> {
     return this.storeService.createStore(createStoreDto);
@@ -43,12 +44,14 @@ export class StoreController {
   }
 
   @ApiOperation({ summary: 'Delete product in store' })
+  @ApiResponse({ status: 200, description: 'Deleted Store', type: [Store] })
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.storeService.deleteById(+id);
   }
 
-  @ApiOperation({ summary: 'Product in store edit' })
+  @ApiOperation({ summary: 'Store  edit' })
+  @ApiResponse({ status: 200, description: 'Updated Store', type: [Store] })
   @Put(':id')
   async updateById(
     @Param('id') id: string,

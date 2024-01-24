@@ -96,7 +96,7 @@ import { Otp } from './otp/model/otp.model';
     OrderModule,
     RolesModule,
     OtpModule,
-    SmsModule,
+    SmsModule,,
   ],
   controllers: [],
   providers: [],

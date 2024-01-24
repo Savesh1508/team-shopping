@@ -79,7 +79,7 @@ export class UserAddress extends Model<UserAddress, userAddressAttrs> {
     allowNull: false,
   })
   floor: string;
-  
+
   @HasMany(() => Order)
   order: Order[];
 }

@@ -64,6 +64,7 @@ export class AdminService {
       password: hashed_password,
     });
     const token = await this.getTokens(newAdmin);
+    console.log('token=', token);
 
     const hashed_refresh_token = await bcrypt.hash(token.refresh_token, 7);
 

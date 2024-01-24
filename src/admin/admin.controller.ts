@@ -93,9 +93,8 @@ export class AdminController {
     @Query('last_name') last_name: string,
     @Query('email') email: string,
   ) {
-    return this.adminService.SearchAdmin({ name, last_name, email} );
+    return this.adminService.SearchAdmin({ name, last_name, email });
   }
-
 
   @ApiOperation({ summary: 'Update by id yourself' })
   @ApiResponse({ status: 201, type: Admin })

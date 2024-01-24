@@ -1,10 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Table,
+  Model,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { Product } from 'src/product/models/product.model';
 
 interface MediaAttrs {
   media_link: string;
-  product_id:number
+  product_id: number;
 }
 
 @Table({ tableName: 'Media' })
@@ -17,7 +24,10 @@ export class Media extends Model<Media, MediaAttrs> {
   })
   id: number;
 
-  @ApiProperty({ example: 'data:image/jpeg;base64,/9j', description: 'Media link' })
+  @ApiProperty({
+    example: 'data:image/jpeg;base64,/9j',
+    description: 'Media link',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -33,5 +43,4 @@ export class Media extends Model<Media, MediaAttrs> {
 
   @BelongsTo(() => Product)
   product: Product;
-
 }
