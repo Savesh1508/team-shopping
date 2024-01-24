@@ -6,11 +6,6 @@ import {
   Param,
   Delete,
   Put,
-  UseGuards,
-  HttpCode,
-  HttpStatus,
-  UseInterceptors,
-  UploadedFile,
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -18,7 +13,6 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './models/product.model';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Product')
 @Controller('product')

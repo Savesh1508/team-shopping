@@ -1,4 +1,3 @@
-import { Admin } from 'src/admin/models/admin.model';
 import { UserRoles } from './roles/models/user-roles.model';
 import { CuponCode } from './cupon_code/models/cupon_code.model';
 import { CuponCodeModule } from './cupon_code/cupon_code.module';
@@ -34,6 +33,12 @@ import { Order } from './order/models/order.model';
 import { Role } from './roles/models/role.model';
 import { AdminRoles } from './roles/models/admin-roles.model';
 import { RolesModule } from './roles/roles.module';
+import { Admin } from './admin/models/admin.model';
+import { UserModule } from './user/user.module';
+import { OtpModule } from './otp/otp.module';
+import { SmsModule } from './sms/sms.module';
+import { User } from './user/models/user.model';
+import { Otp } from './otp/model/otp.model';
 
 @Module({
   imports: [
@@ -68,10 +73,13 @@ import { RolesModule } from './roles/roles.module';
         Role,
         UserRoles,
         AdminRoles,
+        User,
+        Otp,
       ],
       autoLoadModels: true,
       logging: false,
     }),
+    UserModule,
     CuponCodeModule,
     MediaModule,
     FilesModule,
@@ -87,6 +95,8 @@ import { RolesModule } from './roles/roles.module';
     discountProductModule,
     OrderModule,
     RolesModule,
+    OtpModule,
+    SmsModule,,
   ],
   controllers: [],
   providers: [],
