@@ -19,6 +19,5 @@ export class CreateBasketDto {
   status: boolean;
 
   @ApiProperty({ example: '1', description: 'User id' })
-  @IsNumber()
   user_id: number;
 }
