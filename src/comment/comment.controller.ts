@@ -18,6 +18,7 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
   @ApiOperation({ summary: 'Add comment' })
+  @ApiResponse({ status: 200, description: 'New  Comment1', type: [Comment1] })
   @Post('create')
   async create(@Body() createCommentDto: CreateCommentDto) {
     return this.commentService.create(createCommentDto);
@@ -35,12 +36,18 @@ export class CommentController {
   }
 
   @ApiOperation({ summary: 'Id Serach Comment' })
+  @ApiResponse({ status: 200, description: 'Comment1 by Id', type: [Comment1] })
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Comment1> {
     return this.commentService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Update Comment' })
+  @ApiResponse({
+    status: 200,
+    description: 'Updated Comment1',
+    type: [Comment1],
+  })
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -50,6 +57,11 @@ export class CommentController {
   }
 
   @ApiOperation({ summary: 'Delete Comment' })
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted Comment',
+    type: [Comment1],
+  })
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.commentService.delete(id);

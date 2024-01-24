@@ -86,7 +86,7 @@ import { RolesModule } from './roles/roles.module';
     AdminModule,
     discountProductModule,
     OrderModule,
-    RolesModule
+    RolesModule,
   ],
   controllers: [],
   providers: [],

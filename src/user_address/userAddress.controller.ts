@@ -18,6 +18,11 @@ import { UpdateuserAddressDto } from './dto/update-userAddress.dto';
 export class UserAddressController {
   constructor(private readonly userAddressService: UserAddressService) {}
   @ApiOperation({ summary: 'Add comment' })
+  @ApiResponse({
+    status: 200,
+    description: 'New  UserAddress',
+    type: [UserAddress],
+  })
   @Post('create')
   async create(@Body() createUserAddressDto: CreateUserAddressDto) {
     return this.userAddressService.create(createUserAddressDto);
@@ -35,12 +40,22 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Id Serach UserAddress' })
+  @ApiResponse({
+    status: 200,
+    description: 'UserAddress by Id',
+    type: [UserAddress],
+  })
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<UserAddress> {
     return this.userAddressService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Update UserAddress' })
+  @ApiResponse({
+    status: 200,
+    description: 'Updated UserAddress',
+    type: [UserAddress],
+  })
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -50,6 +65,11 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Delete UserAddress' })
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted UserAddress',
+    type: [UserAddress],
+  })
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.userAddressService.delete(id);

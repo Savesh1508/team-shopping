@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Table,
+  Model,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { Basket } from 'src/basket/models/basket.model';
 import { Product } from 'src/product/models/product.model';
 
@@ -20,7 +27,10 @@ export class BasketItems extends Model<BasketItems, BasketItemsAttrs> {
   })
   id: number;
 
-  @ApiProperty({ example: "12000 so'm", description: 'BasketItems total_price' })
+  @ApiProperty({
+    example: "12000 so'm",
+    description: 'BasketItems total_price',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -52,5 +62,5 @@ export class BasketItems extends Model<BasketItems, BasketItemsAttrs> {
   basket_id: number;
 
   @BelongsTo(() => Basket)
-  basket: Basket; 
+  basket: Basket;
 }

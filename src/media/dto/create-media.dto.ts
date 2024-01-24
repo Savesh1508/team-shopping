@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateMediaDto {
   @ApiProperty({
@@ -11,5 +11,6 @@ export class CreateMediaDto {
   media_link: string;
 
   @ApiProperty({ example: '1', description: 'Product id' })
+  @IsNumber()
   product_id: number;
 }

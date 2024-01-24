@@ -178,5 +178,4 @@ export class Product extends Model<Product, ProductAttrs> {
 
   @HasMany(() => Comment1)
   comment: Comment1[];
- 
 }

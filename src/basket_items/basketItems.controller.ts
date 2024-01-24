@@ -18,6 +18,11 @@ import { UpdateBasketItemsDto } from './dto/update-basketItems.dto';
 export class BasketItemsController {
   constructor(private readonly basketItemsService: BasketItemsService) {}
   @ApiOperation({ summary: 'Add BasketItems' })
+  @ApiResponse({
+    status: 200,
+    description: 'New  BasketItems',
+    type: [BasketItems],
+  })
   @Post('create')
   async create(@Body() createBasketItemsDto: CreateBasketItemsDto) {
     return this.basketItemsService.create(createBasketItemsDto);
@@ -35,12 +40,22 @@ export class BasketItemsController {
   }
 
   @ApiOperation({ summary: 'Id Serach BasketItems' })
+  @ApiResponse({
+    status: 200,
+    description: 'BasketItems by Id',
+    type: [BasketItems],
+  })
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<BasketItems> {
     return this.basketItemsService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Update BasketItems' })
+  @ApiResponse({
+    status: 200,
+    description: 'Updated BasketItems',
+    type: [BasketItems],
+  })
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -50,6 +65,11 @@ export class BasketItemsController {
   }
 
   @ApiOperation({ summary: 'Delete BasketItems' })
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted BasketItems',
+    type: [BasketItems],
+  })
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.basketItemsService.delete(id);

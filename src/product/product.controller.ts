@@ -26,6 +26,7 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @ApiOperation({ summary: 'Add Product' })
+  @ApiResponse({ status: 200, description: 'New  Product', type: [Product] })
   @Post('create')
   async createProduct(
     @Body() createProductDto: CreateProductDto,
@@ -52,12 +53,14 @@ export class ProductController {
   }
 
   @ApiOperation({ summary: 'Delete Product' })
+  @ApiResponse({ status: 200, description: 'Deleted Product', type: [Product] })
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.productService.deleteById(+id);
   }
 
   @ApiOperation({ summary: 'Product edit' })
+  @ApiResponse({ status: 200, description: 'Updated Product', type: [Product] })
   @Put(':id')
   async updateById(
     @Param('id') id: string,
@@ -65,7 +68,6 @@ export class ProductController {
   ) {
     return this.productService.updateById(+id, updateProductDto);
   }
-
 
   @ApiOperation({ summary: 'Search product' })
   @Get('search')
@@ -75,6 +77,6 @@ export class ProductController {
     @Query('qr_code') qr_code: string,
     @Query('brand') brand: string,
   ) {
-    return this.productService.search({name, price, qr_code, brand});
+    return this.productService.search({ name, price, qr_code, brand });
   }
 }

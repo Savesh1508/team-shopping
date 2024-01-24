@@ -67,8 +67,8 @@ export class AdminService {
     console.log('newAdmin', newAdmin);
 
     const token = await this.getTokens(newAdmin);
-    console.log("token=", token);
-    
+    console.log('token=', token);
+
     const hashed_refresh_token = await bcrypt.hash(token.refresh_token, 7);
 
     const updateAdmin = await this.adminRepo.update(
@@ -157,9 +157,9 @@ export class AdminService {
     return response;
   }
 
-  async  SearchAdmin({ name, last_name, email} ) {
+  async SearchAdmin({ name, last_name, email }) {
     let where = {};
-    
+
     if (name) {
       where['first_name'] = { [Op.like]: `%${name}%` };
     }

@@ -7,8 +7,7 @@ import { Op } from 'sequelize';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel(Product) private productRepo: typeof Product,
-  ) {}
+  constructor(@InjectModel(Product) private productRepo: typeof Product) {}
 
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     const product = await this.productRepo.create(createProductDto);
@@ -41,9 +40,7 @@ export class ProductService {
     return product[1][0];
   }
 
-  
-
-  async search({name, price, qr_code, brand}) {
+  async search({ name, price, qr_code, brand }) {
     const where = {};
 
     if (name) {

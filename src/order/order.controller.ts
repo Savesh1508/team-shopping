@@ -1,5 +1,13 @@
 import { Order } from './models/order.model';
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -27,6 +35,7 @@ export class OrderController {
   }
 
   @ApiOperation({ summary: 'Id Serach Order' })
+  @ApiResponse({ status: 200, description: 'Order', type: Order })
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Order> {
     return this.orderService.findOne(id);

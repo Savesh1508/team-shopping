@@ -5,10 +5,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { CuponCode } from './models/cupon_code.model';
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([CuponCode]),
-  ],
+  imports: [SequelizeModule.forFeature([CuponCode])],
   controllers: [CuponCodeController],
-  providers: [CuponCodeService]
+  providers: [CuponCodeService],
 })
 export class CuponCodeModule {}

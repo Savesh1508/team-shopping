@@ -20,6 +20,7 @@ export class DiscountController {
   constructor(private readonly discountService: DiscountService) {}
 
   @ApiOperation({ summary: 'Add discount by Admin' })
+  @ApiResponse({ status: 200, description: 'New  Discount', type: [Discount] })
   @Post('create')
   create(@Body() createDiscountDto: CreateDiscountDto): Promise<Discount> {
     return this.discountService.createDiscount(createDiscountDto);
@@ -50,6 +51,11 @@ export class DiscountController {
   }
 
   @ApiOperation({ summary: 'delete discount by id by Admin' })
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted Discount',
+    type: [Discount],
+  })
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<number> {
     return this.discountService.removeDiscount(+id);

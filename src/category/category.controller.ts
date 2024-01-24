@@ -23,8 +23,9 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
-  
+
   @ApiOperation({ summary: 'Add category' })
+  @ApiResponse({ status: 200, description: 'New  Category', type: [Category] })
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   create(
@@ -46,6 +47,7 @@ export class CategoryController {
   }
 
   @ApiOperation({ summary: 'Category  edit' })
+  @ApiResponse({ status: 200, description: 'Category by Id', type: [Category] })
   @Put(':id')
   async updateById(
     @Param('id') id: string,
@@ -71,6 +73,11 @@ export class CategoryController {
   }
 
   @ApiOperation({ summary: 'Delete Category' })
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted Category',
+    type: [Category],
+  })
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.categoryService.deleteById(+id);

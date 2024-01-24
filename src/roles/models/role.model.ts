@@ -1,9 +1,15 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 // import { User } from "src/user/models/user.model";
 // import { UserRoles } from "./user-roles.model";
-import { ApiProperty } from "@nestjs/swagger";
-import { Admin } from "src/admin/models/admin.model";
-import { AdminRoles } from "./admin-roles.model";
+import { ApiProperty } from '@nestjs/swagger';
+import { Admin } from 'src/admin/models/admin.model';
+import { AdminRoles } from './admin-roles.model';
 
 interface RoleCreationAttributes {
   value: string;
@@ -12,26 +18,26 @@ interface RoleCreationAttributes {
 
 @Table({ tableName: 'roles' })
 export class Role extends Model<Role, RoleCreationAttributes> {
-  @ApiProperty({ example: 1, description: 'Unikal ID'})
+  @ApiProperty({ example: 1, description: 'Unikal ID' })
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   })
   id: number;
 
-  @ApiProperty({example:"USER", description:"User role"})
+  @ApiProperty({ example: 'USER', description: 'User role' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   })
   value: string;
-z
-  @ApiProperty({example:"USER role", description:"Info about users role"})
+  z;
+  @ApiProperty({ example: 'USER role', description: 'Info about users role' })
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
   description: string;
 

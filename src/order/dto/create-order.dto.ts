@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
-  IsEmail,
   IsDate,
   IsNumber,
   IsBoolean,
@@ -51,14 +50,18 @@ export class CreateOrderDto {
   payment_type: string;
 
   @ApiProperty({ example: '1', description: 'userAddres id' })
+  @IsNumber()
   userAddres_id: number;
 
   @ApiProperty({ example: '1', description: 'User id' })
+  @IsNumber()
   user_id: number;
 
   @ApiProperty({ example: '1', description: ' basket id' })
+  @IsNumber()
   basket_id: number;
 
   @ApiProperty({ example: '1', description: 'cupon_code id' })
+  @IsNumber()
   cupon_code_id: number;
 }

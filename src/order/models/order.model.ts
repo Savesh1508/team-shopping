@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Table,
+  Model,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { Basket } from 'src/basket/models/basket.model';
 import { CuponCode } from 'src/cupon_code/models/cupon_code.model';
 import { UserAddress } from 'src/user_address/models/userAddress.model';
@@ -48,7 +55,7 @@ export class Order extends Model<Order, OrderAttrs> {
   })
   created_at: Date;
 
-  @ApiProperty({ example: "true", description: 'Order status' })
+  @ApiProperty({ example: 'true', description: 'Order status' })
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,

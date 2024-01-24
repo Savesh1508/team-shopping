@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Table,
+  Model,
+  BelongsTo,
+  ForeignKey,
+} from 'sequelize-typescript';
 import { Discount } from 'src/discount/models/discount.model';
 import { Product } from 'src/product/models/product.model';
 
