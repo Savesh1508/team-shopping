@@ -4,8 +4,6 @@ import { Column, DataType, Table, Model } from 'sequelize-typescript';
 interface UserAttrs {
   full_name: string;
   phone: string;
-  is_active: boolean;
-  image: string;
   hashed_refresh_token: string;
 }
 
@@ -32,25 +30,8 @@ export class User extends Model<User, UserAttrs> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
   })
   phone: string;
-
-  @ApiProperty({ example: 'true', description: 'User activity' })
-  @Column({
-    type: DataType.BOOLEAN,
-    defaultValue: true,
-  })
-  is_active: boolean;
-
-  @ApiProperty({
-    example: 'image.jpg',
-    description: 'User`s image',
-  })
-  @Column({
-    type: DataType.STRING,
-  })
-  image: string;
 
   @ApiProperty({
     example: 'Token',
@@ -58,6 +39,18 @@ export class User extends Model<User, UserAttrs> {
   })
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   hashed_refresh_token: string;
+
+  @ApiProperty({
+    example: 'true',
+    description: 'User`s active',
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: 'true',
+  })
+  is_active: boolean;
 }

@@ -1,3 +1,4 @@
+import { UserRoles } from './roles/models/user-roles.model';
 import { CuponCode } from './cupon_code/models/cupon_code.model';
 import { CuponCodeModule } from './cupon_code/cupon_code.module';
 import { Module } from '@nestjs/common';
@@ -25,6 +26,13 @@ import { UserAddressModule } from './user_address/userAddress.module';
 import { StoreModule } from './store/store.module';
 import { Store } from './store/models/store.model';
 import { AdminModule } from './admin/admin.module';
+import { discountProduct } from './discount_product/models/discountProduct.model';
+import { discountProductModule } from './discount_product/discountProduct.module';
+import { OrderModule } from './order/order.module';
+import { Order } from './order/models/order.model';
+import { Role } from './roles/models/role.model';
+import { AdminRoles } from './roles/models/admin-roles.model';
+import { RolesModule } from './roles/roles.module';
 import { Admin } from './admin/models/admin.model';
 import { UserModule } from './user/user.module';
 import { OtpModule } from './otp/otp.module';
@@ -49,6 +57,7 @@ import { Otp } from './otp/model/otp.model';
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
       models: [
+        Admin,
         CuponCode,
         Category,
         Media,
@@ -59,13 +68,18 @@ import { Otp } from './otp/model/otp.model';
         BasketItems,
         UserAddress,
         Store,
-        Admin,
+        discountProduct,
+        Order,
+        Role,
+        UserRoles,
+        AdminRoles,
         User,
         Otp,
       ],
       autoLoadModels: true,
       logging: false,
     }),
+    UserModule,
     CuponCodeModule,
     MediaModule,
     FilesModule,
@@ -78,7 +92,9 @@ import { Otp } from './otp/model/otp.model';
     BasketItemsModule,
     UserAddressModule,
     AdminModule,
-    UserModule,
+    discountProductModule,
+    OrderModule,
+    RolesModule,
     OtpModule,
     SmsModule,
   ],

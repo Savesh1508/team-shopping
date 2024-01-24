@@ -7,7 +7,7 @@ export class SmsService {
   async sendSms(phone: string, otp: string) {
     const formdata = new FormData();
     formdata.append('mobile_phone', phone);
-    formdata.append('message', `Stadium - ${otp}`);
+    formdata.append('message', `Team_Shopping - ${otp}`);
     formdata.append('from', '4546');
 
     const config = {
@@ -19,6 +19,7 @@ export class SmsService {
     };
     try {
       const resp = await axios(config);
+      return resp;
     } catch (error) {
       console.log(error);
       return { status: 500 };

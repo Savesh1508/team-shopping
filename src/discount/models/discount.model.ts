@@ -1,6 +1,7 @@
 
 import { ApiProperty } from "@nestjs/swagger";
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import { Table, Model, Column, DataType, HasMany } from "sequelize-typescript";
+import { discountProduct } from "src/discount_product/models/discountProduct.model";
 
 interface DiscountCretionAttrs {
     name: string,
@@ -44,4 +45,6 @@ export class Discount extends Model<Discount, DiscountCretionAttrs> {
     })
     end_date: Date;
 
+    @HasMany(() => discountProduct)
+    discount_product: discountProduct[];
 }

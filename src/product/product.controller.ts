@@ -6,19 +6,19 @@ import {
   Param,
   Delete,
   Put,
-  UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './models/product.model';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { FindProductDto } from './dto/find-product.dto';
 
 @ApiTags('Product')
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+
   @ApiOperation({ summary: 'Add Product' })
   @Post('create')
   async createProduct(
@@ -61,8 +61,13 @@ export class ProductController {
   }
 
   @ApiOperation({ summary: 'Search product' })
-  @Post('search')
-  search(@Body() findProductDto: FindProductDto) {
-    return this.productService.search(findProductDto);
+  @Get('search')
+  search(
+    @Query('name') name: string,
+    @Query('price') price: string,
+    @Query('qr_code') qr_code: string,
+    @Query('brand') brand: string,
+  ) {
+    return this.productService.search({ name, price, qr_code, brand });
   }
 }

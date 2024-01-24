@@ -9,4 +9,6 @@ export class CreateStoreDto {
   @IsNotEmpty()
   @IsNumber()
   addCount: number;
+
+  product_id: number;
 }

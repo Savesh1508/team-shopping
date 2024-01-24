@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Basket } from 'src/basket/models/basket.model';
+import { Product } from 'src/product/models/product.model';
 
 interface BasketItemsAttrs {
   total_price: string;
@@ -31,4 +33,24 @@ export class BasketItems extends Model<BasketItems, BasketItemsAttrs> {
     allowNull: false,
   })
   quantity: number;
+
+  @ForeignKey(() => Product)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  product_id: number;
+
+  @BelongsTo(() => Product)
+  product: Product;
+
+  @ForeignKey(() => Basket)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  basket_id: number;
+
+  @BelongsTo(() => Basket)
+  basket: Basket; 
 }

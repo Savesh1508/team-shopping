@@ -75,7 +75,7 @@ export class UserService {
     return response;
   }
 
-  async findAll(findUserDto: FindUserDto) {
+  async search(findUserDto: FindUserDto) {
     const where = {};
     if (findUserDto.full_name) {
       where['full_name'] = {
@@ -165,13 +165,12 @@ export class UserService {
     const encoded = await encode(JSON.stringify(details));
     return { status: 'Success', Details: encoded, message };
   }
-
   async verifyOtp(verifyOtpDto: VerifyOtpDto) {
     const { verification_key, otp, phone } = verifyOtpDto;
     const currentdate = new Date();
     const decoded = await decode(verification_key);
     const details = JSON.parse(decoded);
-    if (details.check != phone) {
+    if (details.phone != phone) {
       throw new BadRequestException('OTP bu raqamga yuborilmagan');
     }
     const result = await this.otpRepo.findOne({
@@ -212,5 +211,17 @@ export class UserService {
     } else {
       throw new BadRequestException("Bunday OTP yo'q");
     }
+  }
+
+  async updateUser(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepo.update(updateUserDto, {
+      where: { id },
+      returning: true,
+    });
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    return user;
   }
 }

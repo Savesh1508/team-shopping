@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import { BasketItems } from 'src/basket_items/models/basketItems.model';
+import { Order } from 'src/order/models/order.model';
 
 interface BasketAttrs {
   created_at: Date;
@@ -30,4 +32,10 @@ export class Basket extends Model<Basket, BasketAttrs> {
     allowNull: false,
   })
   status: boolean;
+
+  @HasMany(() => Order)
+  order: Order[];
+
+  @HasMany(() => BasketItems)
+  basketItems: BasketItems[];
 }

@@ -9,7 +9,6 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Category } from './models/category.model';
 import { FilesService } from '../files/files.service';
-import { FindCategoryDto } from './dto/find-category.dto';
 import { Op } from 'sequelize';
 
 @Injectable()
@@ -42,8 +41,30 @@ export class CategoryService {
     return category;
   }
 
+  async updateById(
+    id: number,
+    updateCategoryDto: UpdateCategoryDto,
+  ): Promise<Category> {
+    const category = await this.categoryRepository.update(updateCategoryDto, {
+      where: { id },
+      returning: true,
+    });
+
+    return category[1][0];
+  }
+
+  async removeFile(id: number) {
+    const category = await this.categoryRepository.findOne({ where: { id } });
+
+    if (!category) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.fileService.removeFile(category.image);
+  }
+
   async updateImage(id: number, image: any) {
-    const removeFile = await this.remove(id);
+    const removeFile = await this.removeFile(id);
 
     if (!removeFile) {
       throw new BadRequestException("Don't remove image");
@@ -69,16 +90,17 @@ export class CategoryService {
     return this.fileService.removeFile(post.image);
   }
 
-  async search(findCategoryDto: FindCategoryDto) {
+  async search(name: string) {
     const where = {};
-    if (findCategoryDto.name) {
+
+    if (name) {
       where['name'] = {
-        [Op.like]: `%${findCategoryDto.name}%`,
+        [Op.like]: `%${name}%`,
       };
     }
     const category = await Category.findAll({ where });
     if (!category) {
-      throw new BadRequestException('category not found');
+      throw new BadRequestException('Category not found');
     }
     return category;
   }

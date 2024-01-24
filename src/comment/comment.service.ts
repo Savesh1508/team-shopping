@@ -16,7 +16,7 @@ export class CommentService {
   }
 
   async findAll(): Promise<Comment1[]> {
-    return this.commentRepository.findAll();
+    return this.commentRepository.findAll({ include: { all: true } });
   }
 
   async findOne(id: number): Promise<Comment1> {

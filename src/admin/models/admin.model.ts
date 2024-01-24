@@ -13,7 +13,7 @@ interface AdminAttrs {
   is_superAdmin: boolean;
 }
 
-@Table({ tableName: 'admin' })
+@Table({ tableName: 'Admin' })
 export class Admin extends Model<Admin, AdminAttrs> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
@@ -64,7 +64,7 @@ export class Admin extends Model<Admin, AdminAttrs> {
   phone: string;
 
   @ApiProperty({
-    example: 'ture',
+    example: 'true',
     description: "Admin super adminmi yoki yo'q",
   })
   @Column({
@@ -76,7 +76,7 @@ export class Admin extends Model<Admin, AdminAttrs> {
   @ApiProperty({ example: 'false', description: 'Admin activligi' })
   @Column({
     type: DataType.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
   })
   is_active: boolean;
 

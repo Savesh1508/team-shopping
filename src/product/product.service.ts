@@ -3,12 +3,12 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Product } from './models/product.model';
-import { FindProductDto } from './dto/find-product.dto';
 import { Op } from 'sequelize';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel(Product) private productRepo: typeof Product) {}
+  constructor(@InjectModel(Product) private productRepo: typeof Product,
+  ) {}
 
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     const product = await this.productRepo.create(createProductDto);
@@ -41,26 +41,29 @@ export class ProductService {
     return product[1][0];
   }
 
-  async search(findProductDto: FindProductDto) {
+  
+
+  async search({name, price, qr_code, brand}) {
     const where = {};
-    if (findProductDto.name) {
+
+    if (name) {
       where['name'] = {
-        [Op.like]: `%${findProductDto.name}%`,
+        [Op.like]: `%${name}%`,
       };
     }
-    if (findProductDto.price) {
+    if (price) {
       where['price'] = {
-        [Op.like]: `%${findProductDto.price}%`,
+        [Op.like]: `%${price}%`,
       };
     }
-    if (findProductDto.qr_code) {
+    if (qr_code) {
       where['qr_code'] = {
-        [Op.like]: `%${findProductDto.qr_code}%`,
+        [Op.like]: `%${qr_code}%`,
       };
     }
-    if (findProductDto.brand) {
+    if (brand) {
       where['brand'] = {
-        [Op.like]: `%${findProductDto.brand}%`,
+        [Op.like]: `%${brand}%`,
       };
     }
     const product = await Product.findAll({ where });
