@@ -6,10 +6,11 @@ import { Order } from './models/order.model';
 import { CuponCode } from 'src/cupon_code/models/cupon_code.model';
 import { Basket } from 'src/basket/models/basket.model';
 import { UserAddress } from 'src/user_address/models/userAddress.model';
+import { User } from 'src/user/models/user.model';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([Order, CuponCode, Basket, UserAddress]),
+    SequelizeModule.forFeature([Order, CuponCode, Basket, UserAddress,User]),
   ],
   controllers: [OrderController],
   providers: [OrderService],

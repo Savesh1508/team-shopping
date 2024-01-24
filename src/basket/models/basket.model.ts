@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { BasketItems } from 'src/basket_items/models/basketItems.model';
 import { Order } from 'src/order/models/order.model';
+import { User } from 'src/user/models/user.model';
 
 interface BasketAttrs {
   created_at: Date;
@@ -38,4 +39,14 @@ export class Basket extends Model<Basket, BasketAttrs> {
 
   @HasMany(() => BasketItems)
   basketItems: BasketItems[];
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  user_id: number;
+
+  @BelongsTo(() => User)
+  user: User;
 }

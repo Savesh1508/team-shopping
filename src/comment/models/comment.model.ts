@@ -8,6 +8,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { Product } from 'src/product/models/product.model';
+import { User } from 'src/user/models/user.model';
 
 interface CommentAttrs {
   name: string;
@@ -81,4 +82,14 @@ export class Comment1 extends Model<Comment1, CommentAttrs> {
 
   @BelongsTo(() => Product)
   product: Product;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  user_id: number;
+
+  @BelongsTo(() => User)
+  user: User;
 }

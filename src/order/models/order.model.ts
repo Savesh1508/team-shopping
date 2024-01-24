@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Basket } from 'src/basket/models/basket.model';
 import { CuponCode } from 'src/cupon_code/models/cupon_code.model';
+import { User } from 'src/user/models/user.model';
 import { UserAddress } from 'src/user_address/models/userAddress.model';
 
 interface OrderAttrs {
@@ -98,4 +99,14 @@ export class Order extends Model<Order, OrderAttrs> {
 
   @BelongsTo(() => CuponCode)
   cupon_code: CuponCode;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+  })
+  user_id: number;
+
+  @BelongsTo(() => User)
+  user: User;
 }

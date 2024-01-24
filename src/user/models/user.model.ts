@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import { Basket } from 'src/basket/models/basket.model';
+import { Comment1 } from 'src/comment/models/comment.model';
+import { Order } from 'src/order/models/order.model';
 
 interface UserAttrs {
   full_name: string;
@@ -53,4 +56,13 @@ export class User extends Model<User, UserAttrs> {
     defaultValue: 'true',
   })
   is_active: boolean;
+
+  @HasMany(() => Comment1)
+  comment: Comment1[];
+
+  @HasMany(() => Order)
+  order: Order[];
+
+  @HasMany(() => Basket)
+  basket: Basket[];
 }
