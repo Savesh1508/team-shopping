@@ -181,10 +181,18 @@ export class AdminService {
     id: number,
     updateAdminYourselfDto: UpdateAdminYourselfDto,
   ) {
-    const admin = await this.adminRepo.update(updateAdminYourselfDto, {
-      where: { id },
-      returning: true,
-    });
+    const hashed_password = await bcrypt.hash(
+      updateAdminYourselfDto.password,
+      7,
+    );
+
+    const admin = await this.adminRepo.update(
+      { ...updateAdminYourselfDto, password: hashed_password },
+      {
+        where: { id },
+        returning: true,
+      },
+    );
     if (!admin) {
       throw new BadRequestException('Admin not found');
     }
@@ -193,10 +201,15 @@ export class AdminService {
   }
 
   async updateByAdmin(id: number, updateAdminDto: UpdateAdminDto) {
-    const admin = await this.adminRepo.update(updateAdminDto, {
-      where: { id },
-      returning: true,
-    });
+    const hashed_password = await bcrypt.hash(updateAdminDto.password, 7);
+
+    const admin = await this.adminRepo.update(
+      { ...updateAdminDto, password: hashed_password },
+      {
+        where: { id },
+        returning: true,
+      },
+    );
     if (!admin) {
       throw new BadRequestException('Admin not found');
     }
