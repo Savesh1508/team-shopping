@@ -6,10 +6,9 @@ import {
   IsStrongPassword,
   MinLength,
   IsOptional,
-  IsBoolean,
 } from 'class-validator';
 
-export class UpdateAdminDto {
+export class UpdateAdminYourselfDto {
   @ApiProperty({ example: 'salima', description: 'Admin ismi' })
   @IsString()
   @IsOptional()
@@ -43,10 +42,5 @@ export class UpdateAdminDto {
   @IsPhoneNumber()
   @IsOptional()
   phone?: string;
-
-  @ApiProperty({ example: true, description: 'Super admin bo\'lishi' })
-  @IsBoolean()
-  @IsOptional()
-  is_superAdmin?: boolean;
 
 }

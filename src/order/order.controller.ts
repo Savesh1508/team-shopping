@@ -7,17 +7,20 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { selfClientGuard } from '../guards/selfClient.guard';
 
 @ApiTags('Order')
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
   @ApiOperation({ summary: 'Add Order' })
+  @UseGuards(selfClientGuard)
   @Post('create')
   async create(@Body() createOrderDto: CreateOrderDto) {
     return this.orderService.create(createOrderDto);
@@ -29,6 +32,7 @@ export class OrderController {
     description: 'List of Order',
     type: [Order],
   })
+  @UseGuards(selfClientGuard)
   @Get('all')
   async findAll(): Promise<Order[]> {
     return this.orderService.findAll();
@@ -37,6 +41,7 @@ export class OrderController {
   @ApiOperation({ summary: 'Id Serach Order' })
   @ApiResponse({ status: 200, description: 'Order', type: Order })
   @Get(':id')
+  @UseGuards(selfClientGuard)
   async findOne(@Param('id') id: number): Promise<Order> {
     return this.orderService.findOne(id);
   }

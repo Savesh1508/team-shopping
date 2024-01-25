@@ -15,6 +15,7 @@ import { CreateCuponCodeDto } from './dto/create-cupon_code.dto';
 import { UpdateCuponCodeDto } from './dto/update-cupon_code.dto';
 import { CuponCode } from './models/cupon_code.model';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Cupon_codes')
 @Controller('cupon_code')
@@ -26,6 +27,7 @@ export class CuponCodeController {
     description: 'New cupon code',
     type: [CuponCode],
   })
+  @UseGuards(AdminGuard)
   @Post('create')
   async createCuponCode(
     @Body() createCuponCodeDto: CreateCuponCodeDto,
@@ -65,6 +67,7 @@ export class CuponCodeController {
     description: 'Updated cupon code',
     type: [CuponCode],
   })
+  @UseGuards(AdminGuard)
   @Put(':id')
   async updateCuponCodeById(
     @Param('id') id: string,
@@ -83,6 +86,7 @@ export class CuponCodeController {
     description: 'Deleted cupon code',
     type: [CuponCode],
   })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteServiceById(@Param('id') id: string) {
     const cupon_code = await this.cuponCodeService.deleteCuponCodeById(+id);

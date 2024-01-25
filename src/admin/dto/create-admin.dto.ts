@@ -5,8 +5,7 @@ import {
   IsPhoneNumber,
   IsString,
   IsStrongPassword,
-  MinLength,
-  isEmail,
+  MinLength
 } from 'class-validator';
 
 export class CreateAdminDto {

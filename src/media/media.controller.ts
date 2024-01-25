@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { MediaService } from './media.service';
 import { CreateMediaDto } from './dto/create-media.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateMediaDto } from './dto/update-media.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Media')
 @Controller('media')
@@ -19,6 +21,7 @@ export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
   @ApiOperation({ summary: 'Add media' })
   @ApiResponse({ status: 200, description: 'New  Media', type: [Media] })
+  @UseGuards(AdminGuard)
   @Post('create')
   async create(@Body() createMediaDto: CreateMediaDto) {
     return this.mediaService.create(createMediaDto);
@@ -44,6 +47,7 @@ export class MediaController {
 
   @ApiOperation({ summary: 'Update Media' })
   @ApiResponse({ status: 200, description: 'Updated Media', type: [Media] })
+  @UseGuards(AdminGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -54,6 +58,7 @@ export class MediaController {
 
   @ApiOperation({ summary: 'Delete Media' })
   @ApiResponse({ status: 200, description: 'Deleted Media', type: [Media] })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.mediaService.delete(id);

@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { BasketItemsService } from './basketItems.service';
 import { CreateBasketItemsDto } from './dto/create-basketItems.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateBasketItemsDto } from './dto/update-basketItems.dto';
+import { selfClientGuard } from '../guards/selfClient.guard';
 
 @ApiTags('BasketItems')
 @Controller('basketItems')
@@ -23,6 +25,7 @@ export class BasketItemsController {
     description: 'New  BasketItems',
     type: [BasketItems],
   })
+  @UseGuards(selfClientGuard)
   @Post('create')
   async create(@Body() createBasketItemsDto: CreateBasketItemsDto) {
     return this.basketItemsService.create(createBasketItemsDto);
@@ -34,6 +37,7 @@ export class BasketItemsController {
     description: 'List of BasketItems',
     type: [BasketItems],
   })
+  @UseGuards(selfClientGuard)
   @Get('all')
   async findAll(): Promise<BasketItems[]> {
     return this.basketItemsService.findAll();
@@ -45,6 +49,7 @@ export class BasketItemsController {
     description: 'BasketItems by Id',
     type: [BasketItems],
   })
+  @UseGuards(selfClientGuard)
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<BasketItems> {
     return this.basketItemsService.findOne(id);
@@ -56,6 +61,7 @@ export class BasketItemsController {
     description: 'Updated BasketItems',
     type: [BasketItems],
   })
+  @UseGuards(selfClientGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -70,6 +76,7 @@ export class BasketItemsController {
     description: 'Deleted BasketItems',
     type: [BasketItems],
   })
+  @UseGuards(selfClientGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.basketItemsService.delete(id);

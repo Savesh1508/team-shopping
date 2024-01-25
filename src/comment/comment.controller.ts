@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { selfClientGuard } from '../guards/selfClient.guard';
 
 @ApiTags('Comment1')
 @Controller('comment')
@@ -42,12 +44,15 @@ export class CommentController {
     return this.commentService.findOne(id);
   }
 
+
+  
   @ApiOperation({ summary: 'Update Comment' })
   @ApiResponse({
     status: 200,
     description: 'Updated Comment1',
     type: [Comment1],
   })
+  @UseGuards(selfClientGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -62,6 +67,7 @@ export class CommentController {
     description: 'Deleted Comment',
     type: [Comment1],
   })
+  @UseGuards(selfClientGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.commentService.delete(id);

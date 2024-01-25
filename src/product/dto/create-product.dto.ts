@@ -78,9 +78,6 @@ export class CreateProductDto {
     example: '5 star',
     description: 'Product`s  rate',
   })
-  @IsNotEmpty()
-  @IsNumber()
-  rating: number;
 
   @ApiProperty({
     example: 'kg',

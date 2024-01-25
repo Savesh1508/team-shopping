@@ -25,7 +25,6 @@ interface ProductAttrs {
   qr_code: string;
   value: string;
   brand: string;
-  rating: number;
   unit_of_measure: string;
 }
 
@@ -130,11 +129,6 @@ export class Product extends Model<Product, ProductAttrs> {
     example: '5 star',
     description: 'Product`s rating',
   })
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  rating: number;
 
   @ApiProperty({
     example: 'true',
