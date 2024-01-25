@@ -3,9 +3,10 @@ import { DiscountService } from './discount.service';
 import { DiscountController } from './discount.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Discount } from './models/discount.model';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Discount])],
+  imports: [SequelizeModule.forFeature([Discount]), JwtModule.register({})],
   controllers: [DiscountController],
   providers: [DiscountService],
 })

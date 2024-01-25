@@ -7,11 +7,14 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { UserAddressService } from './userAddress.service';
 import { CreateUserAddressDto } from './dto/create-userAddress.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateuserAddressDto } from './dto/update-userAddress.dto';
+import { selfClientGuard } from '../guards/selfClient.guard';
+import { selfAdminGuard } from '../guards/selfAdmin.guard';
 
 @ApiTags('UserAddress')
 @Controller('userAddress')
@@ -23,6 +26,7 @@ export class UserAddressController {
     description: 'New  UserAddress',
     type: [UserAddress],
   })
+  @UseGuards(selfClientGuard)
   @Post('create')
   async create(@Body() createUserAddressDto: CreateUserAddressDto) {
     return this.userAddressService.create(createUserAddressDto);
@@ -34,6 +38,7 @@ export class UserAddressController {
     description: 'List of UserAddress',
     type: [UserAddress],
   })
+  @UseGuards(selfAdminGuard)
   @Get('all')
   async findAll(): Promise<UserAddress[]> {
     return this.userAddressService.findAll();
@@ -45,6 +50,7 @@ export class UserAddressController {
     description: 'UserAddress by Id',
     type: [UserAddress],
   })
+  @UseGuards(selfClientGuard)
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<UserAddress> {
     return this.userAddressService.findOne(id);
@@ -56,6 +62,7 @@ export class UserAddressController {
     description: 'Updated UserAddress',
     type: [UserAddress],
   })
+  @UseGuards(selfClientGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -70,6 +77,7 @@ export class UserAddressController {
     description: 'Deleted UserAddress',
     type: [UserAddress],
   })
+  @UseGuards(selfClientGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.userAddressService.delete(id);

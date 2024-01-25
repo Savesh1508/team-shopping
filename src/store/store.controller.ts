@@ -13,6 +13,7 @@ import { StoreService } from './store.service';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { Store } from './models/store.model';
 import { UpdateStoreDto } from './dto/update-store.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Store')
 @Controller('store')
@@ -31,6 +32,7 @@ export class StoreController {
     description: 'List of products in store',
     type: [Store],
   })
+  @UseGuards(AdminGuard)
   @Get('all')
   async findAll(): Promise<Store[]> {
     return this.storeService.findAll();
@@ -38,6 +40,7 @@ export class StoreController {
 
   @ApiOperation({ summary: 'View product in store by id' })
   @ApiResponse({ status: 200, description: 'Store', type: Store })
+  @UseGuards(AdminGuard)
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Store> {
     return this.storeService.findById(+id);
@@ -45,6 +48,7 @@ export class StoreController {
 
   @ApiOperation({ summary: 'Delete product in store' })
   @ApiResponse({ status: 200, description: 'Deleted Store', type: [Store] })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.storeService.deleteById(+id);
@@ -52,6 +56,7 @@ export class StoreController {
 
   @ApiOperation({ summary: 'Store  edit' })
   @ApiResponse({ status: 200, description: 'Updated Store', type: [Store] })
+  @UseGuards(AdminGuard)
   @Put(':id')
   async updateById(
     @Param('id') id: string,

@@ -7,10 +7,12 @@ import { CuponCode } from 'src/cupon_code/models/cupon_code.model';
 import { Basket } from 'src/basket/models/basket.model';
 import { UserAddress } from 'src/user_address/models/userAddress.model';
 import { User } from 'src/user/models/user.model';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([Order, CuponCode, Basket, UserAddress,User]),
+    SequelizeModule.forFeature([Order, CuponCode, Basket, UserAddress, User]),
+    JwtModule.register({}),
   ],
   controllers: [OrderController],
   providers: [OrderService],

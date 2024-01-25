@@ -13,6 +13,7 @@ import * as bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 import { Response } from 'express';
 import { LoginAdminDto } from './dto/login-admin.dto';
+import { UpdateAdminYourselfDto } from './dto/update-admin-yourself.dto';
 
 @Injectable()
 export class AdminService {
@@ -176,8 +177,11 @@ export class AdminService {
     return admin;
   }
 
-  async updateYourself(id: number, updateAdminDto: UpdateAdminDto) {
-    const admin = await this.adminRepo.update(updateAdminDto, {
+  async updateYourself(
+    id: number,
+    updateAdminYourselfDto: UpdateAdminYourselfDto,
+  ) {
+    const admin = await this.adminRepo.update(updateAdminYourselfDto, {
       where: { id },
       returning: true,
     });

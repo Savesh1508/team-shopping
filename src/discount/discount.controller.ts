@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { DiscountService } from './discount.service';
 import { CreateDiscountDto } from './dto/create-discount.dto';
 import { UpdateDiscountDto } from './dto/update-discount.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Discount } from './models/discount.model';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Discount')
 @Controller('discount')
@@ -21,6 +23,7 @@ export class DiscountController {
 
   @ApiOperation({ summary: 'Add discount by Admin' })
   @ApiResponse({ status: 200, description: 'New  Discount', type: [Discount] })
+  @UseGuards(AdminGuard)
   @Post('create')
   create(@Body() createDiscountDto: CreateDiscountDto): Promise<Discount> {
     return this.discountService.createDiscount(createDiscountDto);
@@ -42,6 +45,7 @@ export class DiscountController {
 
   @ApiOperation({ summary: 'update discount by id by Admin' })
   @ApiResponse({ status: 201, type: Discount })
+  @UseGuards(AdminGuard)
   @Put(':id')
   update(
     @Param('id') id: string,
@@ -56,6 +60,7 @@ export class DiscountController {
     description: 'Deleted Discount',
     type: [Discount],
   })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<number> {
     return this.discountService.removeDiscount(+id);

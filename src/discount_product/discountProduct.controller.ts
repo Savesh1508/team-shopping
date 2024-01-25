@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { discountProductService } from './discountProduct.service';
 import { CreatediscountProductDto } from './dto/create-discountProduct.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdatediscountProductDto } from './dto/update-discountProduct.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('discountProduct')
 @Controller('discountProduct')
@@ -25,6 +27,7 @@ export class discountProductController {
     description: 'New  discountProduct',
     type: [discountProduct],
   })
+  @UseGuards(AdminGuard)
   @Post('create')
   async create(@Body() creatediscountProductDto: CreatediscountProductDto) {
     return this.discountProductService.create(creatediscountProductDto);
@@ -58,6 +61,7 @@ export class discountProductController {
     description: 'Updated discountProduct',
     type: [discountProduct],
   })
+  @UseGuards(AdminGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -72,6 +76,7 @@ export class discountProductController {
     description: 'Deleted discountProduct',
     type: [discountProduct],
   })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.discountProductService.delete(id);
