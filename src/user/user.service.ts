@@ -5,6 +5,7 @@ import {
   Injectable,
   ServiceUnavailableException,
   UnauthorizedException,
+  Res,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -128,10 +129,10 @@ export class UserService {
     return response;
   }
 
-  async newOTP(createUserDto: CreateUserDto) {
+  async newOTP(createUserDto: CreateUserDto, res: Response) {
     const phone = createUserDto.phone;
-    await this.userRepo.create(createUserDto)
-   
+    const newUser = await this.userRepo.create(createUserDto);
+
     const otp = otpGenerator.generate(4, {
       upperCaseAlphabets: false,
       lowerCaseAlphabets: false,
@@ -164,6 +165,21 @@ export class UserService {
       message: 'OTP sent to user',
       otp_id: newOtp.id,
     };
+    const token = await this.getTokens(newUser);
+
+    const hashed_refresh_token = await bcrypt.hash(token.refresh_token, 7);
+
+    await this.userRepo.update(
+      {
+        hashed_refresh_token: hashed_refresh_token,
+      },
+      { where: { id: newUser.id }, returning: true },
+    );
+
+    res.cookie('refresh_token', token.refresh_token, {
+      maxAge: 15 * 24 * 60 * 60 * 100,
+      httpOnly: true,
+    });
 
     const encoded = await encode(JSON.stringify(details));
     return { status: 'Success', Details: encoded, message };
@@ -186,9 +202,7 @@ export class UserService {
             const user = await this.userRepo.findOne({
               where: { phone: phone },
             });
-            
-            console.log("--", user);
-              
+
             if (user) {
               const updatedUser = await this.userRepo.update(
                 { phone: phone },

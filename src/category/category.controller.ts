@@ -11,6 +11,7 @@ import {
   HttpCode,
   HttpStatus,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CategoryService } from './category.service';
@@ -18,6 +19,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Category } from './models/category.model';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Category')
 @Controller('category')
@@ -26,6 +28,7 @@ export class CategoryController {
 
   @ApiOperation({ summary: 'Add category' })
   @ApiResponse({ status: 200, description: 'New  Category', type: [Category] })
+  @UseGuards(AdminGuard)
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   create(
@@ -48,6 +51,7 @@ export class CategoryController {
 
   @ApiOperation({ summary: 'Category  edit' })
   @ApiResponse({ status: 200, description: 'Category by Id', type: [Category] })
+  @UseGuards(AdminGuard)
   @Put(':id')
   async updateById(
     @Param('id') id: string,
@@ -59,6 +63,7 @@ export class CategoryController {
   @ApiOperation({ summary: 'Image by id update ' })
   @ApiResponse({ status: 201, description: 'update by id image', type: [Post] })
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AdminGuard)
   @Put('file/:id')
   @UseInterceptors(FileInterceptor('image'))
   updateFile(@Param('id') id: string, @UploadedFile() image: any) {
@@ -78,6 +83,7 @@ export class CategoryController {
     description: 'Deleted Category',
     type: [Category],
   })
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.categoryService.deleteById(+id);
