@@ -51,7 +51,6 @@ exports.CategoryController = CategoryController;
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Add category' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'New  Category', type: [category_model_1.Category] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Post)('create'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image')),
     __param(0, (0, common_1.Body)()),

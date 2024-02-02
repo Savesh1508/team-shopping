@@ -28,7 +28,7 @@ export class CategoryController {
 
   @ApiOperation({ summary: 'Add category' })
   @ApiResponse({ status: 200, description: 'New  Category', type: [Category] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   create(
