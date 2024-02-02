@@ -26,6 +26,7 @@ interface ProductAttrs {
   value: string;
   brand: string;
   unit_of_measure: string;
+  sold_count:number;
 }
 
 @Table({ tableName: 'Product' })
@@ -54,6 +55,18 @@ export class Product extends Model<Product, ProductAttrs> {
     allowNull: false,
   })
   description: string;
+
+  
+  @ApiProperty({
+    example: 1,
+    description: 'Product`s sold count',
+  })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  sold_count: number;
+
 
   @ApiProperty({
     example: '25.000.000',

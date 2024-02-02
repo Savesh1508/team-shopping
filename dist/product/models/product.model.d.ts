@@ -16,11 +16,13 @@ interface ProductAttrs {
     value: string;
     brand: string;
     unit_of_measure: string;
+    sold_count: number;
 }
 export declare class Product extends Model<Product, ProductAttrs> {
     id: number;
     name: string;
     description: string;
+    sold_count: number;
     price: string;
     total_count: number;
     mfg: string;

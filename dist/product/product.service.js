@@ -23,6 +23,7 @@ let ProductService = class ProductService {
     }
     async createProduct(createProductDto) {
         const product = await this.productRepo.create(createProductDto);
+        console.log(product);
         return product;
     }
     async findAll() {

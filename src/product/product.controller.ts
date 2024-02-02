@@ -23,7 +23,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Add Product' })
   @ApiResponse({ status: 200, description: 'New  Product', type: [Product] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('create')
   async createProduct(
     @Body() createProductDto: CreateProductDto,

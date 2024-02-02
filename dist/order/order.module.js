@@ -17,13 +17,14 @@ const basket_model_1 = require("../basket/models/basket.model");
 const userAddress_model_1 = require("../user_address/models/userAddress.model");
 const user_model_1 = require("../user/models/user.model");
 const jwt_1 = require("@nestjs/jwt");
+const product_model_1 = require("../product/models/product.model");
 let OrderModule = class OrderModule {
 };
 exports.OrderModule = OrderModule;
 exports.OrderModule = OrderModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            sequelize_1.SequelizeModule.forFeature([order_model_1.Order, cupon_code_model_1.CuponCode, basket_model_1.Basket, userAddress_model_1.UserAddress, user_model_1.User]),
+            sequelize_1.SequelizeModule.forFeature([order_model_1.Order, cupon_code_model_1.CuponCode, basket_model_1.Basket, userAddress_model_1.UserAddress, user_model_1.User, product_model_1.Product]),
             jwt_1.JwtModule.register({}),
         ],
         controllers: [order_controller_1.OrderController],

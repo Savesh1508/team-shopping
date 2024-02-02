@@ -3,10 +3,12 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Order } from './models/order.model';
+import { Product } from '../product/models/product.model';
 
 @Injectable()
 export class OrderService {
-  constructor(@InjectModel(Order) private orderRepository: typeof Order) {}
+  constructor(@InjectModel(Order) private orderRepository: typeof Order,
+  @InjectModel(Product) private readonly productRepo: typeof Product) {}
 
   async create(createOrderDto: CreateOrderDto) {
     const order = await this.orderRepository.create(createOrderDto);
