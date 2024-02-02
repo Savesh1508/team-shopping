@@ -16,9 +16,11 @@ exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const order_model_1 = require("./models/order.model");
+const product_model_1 = require("../product/models/product.model");
 let OrderService = class OrderService {
-    constructor(orderRepository) {
+    constructor(orderRepository, productRepo) {
         this.orderRepository = orderRepository;
+        this.productRepo = productRepo;
     }
     async create(createOrderDto) {
         const order = await this.orderRepository.create(createOrderDto);
@@ -51,6 +53,7 @@ exports.OrderService = OrderService;
 exports.OrderService = OrderService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, sequelize_1.InjectModel)(order_model_1.Order)),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, sequelize_1.InjectModel)(product_model_1.Product)),
+    __metadata("design:paramtypes", [Object, Object])
 ], OrderService);
 //# sourceMappingURL=order.service.js.map

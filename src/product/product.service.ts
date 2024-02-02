@@ -11,6 +11,8 @@ export class ProductService {
 
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     const product = await this.productRepo.create(createProductDto);
+    console.log(product);
+    
     return product;
   }
 

@@ -51,6 +51,17 @@ __decorate([
 ], Product.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
+        example: 1,
+        description: 'Product`s sold count',
+    }),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: true,
+    }),
+    __metadata("design:type", Number)
+], Product.prototype, "sold_count", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
         example: '25.000.000',
         description: 'Product`s price',
     }),

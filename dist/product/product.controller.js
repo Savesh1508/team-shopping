@@ -47,7 +47,6 @@ exports.ProductController = ProductController;
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Add Product' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'New  Product', type: [product_model_1.Product] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

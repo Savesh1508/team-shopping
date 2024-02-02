@@ -15,6 +15,7 @@ async function start() {
             .build();
         const PORT = process.env.PORT || 3002;
         const app = await core_1.NestFactory.create(app_module_1.AppModule);
+        app.enableCors();
         const document = swagger_1.SwaggerModule.createDocument(app, config);
         swagger_1.SwaggerModule.setup('/docs', app, document);
         app.use(cookieParser());

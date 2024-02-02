@@ -12,8 +12,10 @@ async function start() {
       .setVersion('1.0.0')
       .addTag('NestJS, Postgress, Sequielize')
       .build();
+
     const PORT = process.env.PORT || 3002;
     const app = await NestFactory.create(AppModule);
+    app.enableCors();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('/docs', app, document);
 
