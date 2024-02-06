@@ -27,7 +27,7 @@ export class discountProductController {
     description: 'New  discountProduct',
     type: [discountProduct],
   })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('create')
   async create(@Body() creatediscountProductDto: CreatediscountProductDto) {
     return this.discountProductService.create(creatediscountProductDto);

@@ -32,7 +32,7 @@ export class StoreController {
     description: 'List of products in store',
     type: [Store],
   })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Get('all')
   async findAll(): Promise<Store[]> {
     return this.storeService.findAll();

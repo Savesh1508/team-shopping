@@ -54,7 +54,7 @@ export class AdminController {
   @ApiOperation({ summary: 'Logout Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('signout')
   logout(
     @CookieGetter('refresh_token') refreshToken: string,

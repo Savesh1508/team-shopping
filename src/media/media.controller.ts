@@ -21,7 +21,7 @@ export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
   @ApiOperation({ summary: 'Add media' })
   @ApiResponse({ status: 200, description: 'New  Media', type: [Media] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('create')
   async create(@Body() createMediaDto: CreateMediaDto) {
     return this.mediaService.create(createMediaDto);
@@ -47,7 +47,7 @@ export class MediaController {
 
   @ApiOperation({ summary: 'Update Media' })
   @ApiResponse({ status: 200, description: 'Updated Media', type: [Media] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -58,7 +58,7 @@ export class MediaController {
 
   @ApiOperation({ summary: 'Delete Media' })
   @ApiResponse({ status: 200, description: 'Deleted Media', type: [Media] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.mediaService.delete(id);

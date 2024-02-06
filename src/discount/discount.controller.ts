@@ -23,7 +23,7 @@ export class DiscountController {
 
   @ApiOperation({ summary: 'Add discount by Admin' })
   @ApiResponse({ status: 200, description: 'New  Discount', type: [Discount] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('create')
   create(@Body() createDiscountDto: CreateDiscountDto): Promise<Discount> {
     return this.discountService.createDiscount(createDiscountDto);
@@ -45,7 +45,7 @@ export class DiscountController {
 
   @ApiOperation({ summary: 'update discount by id by Admin' })
   @ApiResponse({ status: 201, type: Discount })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Put(':id')
   update(
     @Param('id') id: string,
