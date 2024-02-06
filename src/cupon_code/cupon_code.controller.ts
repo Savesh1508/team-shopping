@@ -27,7 +27,7 @@ export class CuponCodeController {
     description: 'New cupon code',
     type: [CuponCode],
   })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post('create')
   async createCuponCode(
     @Body() createCuponCodeDto: CreateCuponCodeDto,
@@ -67,7 +67,7 @@ export class CuponCodeController {
     description: 'Updated cupon code',
     type: [CuponCode],
   })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Put(':id')
   async updateCuponCodeById(
     @Param('id') id: string,
