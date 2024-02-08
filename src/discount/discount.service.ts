@@ -16,7 +16,7 @@ export class DiscountService {
   }
 
   findAllDiscount() {
-    return this.discountRepository.findAll();
+    return this.discountRepository.findAll({include:{all:true} });
   }
 
   async findOneDiscount(id: number) {

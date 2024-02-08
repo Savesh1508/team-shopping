@@ -21,7 +21,6 @@ const swagger_1 = require("@nestjs/swagger");
 const admin_model_1 = require("./models/admin.model");
 const login_admin_dto_1 = require("./dto/login-admin.dto");
 const sequelize_1 = require("sequelize");
-const admin_guard_1 = require("../guards/admin.guard");
 const cookieGetter_decorator_1 = require("../decorators/cookieGetter.decorator");
 const superAdmin_guard_1 = require("../guards/superAdmin.guard");
 const selfAdmin_guard_1 = require("../guards/selfAdmin.guard");
@@ -86,7 +85,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Logout Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: admin_model_1.Admin }),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Post)('signout'),
     __param(0, (0, cookieGetter_decorator_1.CookieGetter)('refresh_token')),
     __param(1, (0, common_1.Res)({ passthrough: true })),

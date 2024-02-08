@@ -57,7 +57,6 @@ __decorate([
         description: 'List of products in store',
         type: [store_model_1.Store],
     }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Get)('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
