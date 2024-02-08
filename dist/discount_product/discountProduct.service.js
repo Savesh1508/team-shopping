@@ -25,7 +25,7 @@ let discountProductService = class discountProductService {
         return discount_product;
     }
     async findAll() {
-        return this.discountProductRepository.findAll();
+        return this.discountProductRepository.findAll({ include: { all: true } });
     }
     async findOne(id) {
         const discount_product = await this.discountProductRepository.findByPk(id);

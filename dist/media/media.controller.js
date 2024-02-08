@@ -19,7 +19,6 @@ const media_service_1 = require("./media.service");
 const create_media_dto_1 = require("./dto/create-media.dto");
 const swagger_1 = require("@nestjs/swagger");
 const update_media_dto_1 = require("./dto/update-media.dto");
-const admin_guard_1 = require("../guards/admin.guard");
 let MediaController = class MediaController {
     constructor(mediaService) {
         this.mediaService = mediaService;
@@ -44,7 +43,6 @@ exports.MediaController = MediaController;
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Add media' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'New  Media', type: [media_model_1.Media] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -75,7 +73,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update Media' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Updated Media', type: [media_model_1.Media] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -86,7 +83,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete Media' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Deleted Media', type: [media_model_1.Media] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

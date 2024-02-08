@@ -30,7 +30,7 @@ let ProductService = class ProductService {
         return this.productRepo.findAll({ include: { all: true } });
     }
     async findById(id) {
-        const product = await this.productRepo.findByPk(id);
+        const product = await this.productRepo.findOne({ include: { all: true }, where: { id } });
         return product;
     }
     async deleteById(id) {

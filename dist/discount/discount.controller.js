@@ -44,7 +44,6 @@ exports.DiscountController = DiscountController;
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Add discount by Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'New  Discount', type: [discount_model_1.Discount] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -71,7 +70,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'update discount by id by Admin' }),
     (0, swagger_1.ApiResponse)({ status: 201, type: discount_model_1.Discount }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),

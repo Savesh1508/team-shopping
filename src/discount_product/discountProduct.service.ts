@@ -19,7 +19,7 @@ export class discountProductService {
   }
 
   async findAll(): Promise<discountProduct[]> {
-    return this.discountProductRepository.findAll();
+    return this.discountProductRepository.findAll({include:{all:true} });
   }
 
   async findOne(id: number): Promise<discountProduct> {
