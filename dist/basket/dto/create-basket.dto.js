@@ -21,7 +21,6 @@ __decorate([
         description: 'Basket created_at',
     }),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsDate)(),
     __metadata("design:type", Date)
 ], CreateBasketDto.prototype, "created_at", void 0);
 __decorate([

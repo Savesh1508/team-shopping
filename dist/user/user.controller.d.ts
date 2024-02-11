@@ -29,4 +29,5 @@ export declare class UserController {
         user: User;
     }>;
     updateUser(id: string, updateUserDto: UpdateUserDto): Promise<[affectedCount: number, affectedRows: User[]]>;
+    findAll(): Promise<User[]>;
 }

@@ -45,6 +45,9 @@ let UserController = class UserController {
     updateUser(id, updateUserDto) {
         return this.userService.updateUser(+id, updateUserDto);
     }
+    async findAll() {
+        return this.userService.findAll();
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -106,6 +109,18 @@ __decorate([
     __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'View all User' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'List of User',
+        type: [user_model_1.User],
+    }),
+    (0, common_1.Get)('all'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "findAll", null);
 exports.UserController = UserController = __decorate([
     (0, swagger_1.ApiTags)('User'),
     (0, common_1.Controller)('user'),

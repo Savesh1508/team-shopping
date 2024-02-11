@@ -77,4 +77,16 @@ export class UserController {
   updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.updateUser(+id, updateUserDto);
   }
+
+  @ApiOperation({ summary: 'View all User' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of User',
+    type: [User],
+  })
+  
+  @Get('all')
+  async findAll(): Promise<User[]> {
+    return this.userService.findAll();
+  }
 }

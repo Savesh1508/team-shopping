@@ -49,7 +49,6 @@ __decorate([
         description: 'New  UserAddress',
         type: [userAddress_model_1.UserAddress],
     }),
-    (0, common_1.UseGuards)(selfClient_guard_1.selfClientGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

@@ -26,7 +26,6 @@ export class UserAddressController {
     description: 'New  UserAddress',
     type: [UserAddress],
   })
-  @UseGuards(selfClientGuard)
   @Post('create')
   async create(@Body() createUserAddressDto: CreateUserAddressDto) {
     return this.userAddressService.create(createUserAddressDto);

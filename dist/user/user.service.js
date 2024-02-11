@@ -211,6 +211,9 @@ let UserService = class UserService {
         }
         return user;
     }
+    async findAll() {
+        return this.userRepo.findAll();
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

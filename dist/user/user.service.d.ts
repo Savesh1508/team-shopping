@@ -39,4 +39,5 @@ export declare class UserService {
         user: User;
     }>;
     updateUser(id: number, updateUserDto: UpdateUserDto): Promise<[affectedCount: number, affectedRows: User[]]>;
+    findAll(): Promise<User[]>;
 }
