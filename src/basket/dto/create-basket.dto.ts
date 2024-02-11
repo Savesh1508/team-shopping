@@ -7,7 +7,6 @@ export class CreateBasketDto {
     description: 'Basket created_at',
   })
   @IsNotEmpty()
-  @IsDate()
   created_at: Date;
 
   @ApiProperty({
