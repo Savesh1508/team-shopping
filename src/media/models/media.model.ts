@@ -29,7 +29,7 @@ export class Media extends Model<Media, MediaAttrs> {
     description: 'Media link',
   })
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false,
   })
   media_link: string;

@@ -7,7 +7,6 @@ export class CreateMediaDto {
     description: 'Media link',
   })
   @IsNotEmpty()
-  @IsString()
   media_link: string;
 
   @ApiProperty({ example: '1', description: 'Product id' })
