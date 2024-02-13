@@ -51,7 +51,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Delete Product' })
   @ApiResponse({ status: 200, description: 'Deleted Product', type: [Product] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.productService.deleteById(+id);
@@ -59,7 +59,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Product edit' })
   @ApiResponse({ status: 200, description: 'Updated Product', type: [Product] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Put(':id')
   async updateById(
     @Param('id') id: string,

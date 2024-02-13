@@ -51,7 +51,7 @@ export class CategoryController {
 
   @ApiOperation({ summary: 'Category  edit' })
   @ApiResponse({ status: 200, description: 'Category by Id', type: [Category] })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Put(':id')
   async updateById(
     @Param('id') id: string,
@@ -63,7 +63,7 @@ export class CategoryController {
   @ApiOperation({ summary: 'Image by id update ' })
   @ApiResponse({ status: 201, description: 'update by id image', type: [Post] })
   @HttpCode(HttpStatus.OK)
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Put('file/:id')
   @UseInterceptors(FileInterceptor('image'))
   updateFile(@Param('id') id: string, @UploadedFile() image: any) {
@@ -83,7 +83,7 @@ export class CategoryController {
     description: 'Deleted Category',
     type: [Category],
   })
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.categoryService.deleteById(+id);
