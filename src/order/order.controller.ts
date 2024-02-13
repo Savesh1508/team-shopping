@@ -32,7 +32,7 @@ export class OrderController {
     description: 'List of Order',
     type: [Order],
   })
-  @UseGuards(selfClientGuard)
+  // @UseGuards(selfClientGuard)
   @Get('all')
   async findAll(): Promise<Order[]> {
     return this.orderService.findAll();
@@ -41,7 +41,7 @@ export class OrderController {
   @ApiOperation({ summary: 'Id Serach Order' })
   @ApiResponse({ status: 200, description: 'Order', type: Order })
   @Get(':id')
-  @UseGuards(selfClientGuard)
+  // @UseGuards(selfClientGuard)
   async findOne(@Param('id') id: number): Promise<Order> {
     return this.orderService.findOne(id);
   }

@@ -37,7 +37,7 @@ export class UserAddressController {
     description: 'List of UserAddress',
     type: [UserAddress],
   })
-  @UseGuards(selfAdminGuard)
+  // @UseGuards(selfAdminGuard)
   @Get('all')
   async findAll(): Promise<UserAddress[]> {
     return this.userAddressService.findAll();
@@ -49,7 +49,7 @@ export class UserAddressController {
     description: 'UserAddress by Id',
     type: [UserAddress],
   })
-  @UseGuards(selfClientGuard)
+  // @UseGuards(selfClientGuard)
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<UserAddress> {
     return this.userAddressService.findOne(id);
@@ -61,7 +61,7 @@ export class UserAddressController {
     description: 'Updated UserAddress',
     type: [UserAddress],
   })
-  @UseGuards(selfClientGuard)
+  // @UseGuards(selfClientGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -76,7 +76,7 @@ export class UserAddressController {
     description: 'Deleted UserAddress',
     type: [UserAddress],
   })
-  @UseGuards(selfClientGuard)
+  // @UseGuards(selfClientGuard)
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.userAddressService.delete(id);

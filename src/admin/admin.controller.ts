@@ -77,7 +77,7 @@ export class AdminController {
 
   @ApiOperation({ summary: 'All Admin' })
   @ApiResponse({ status: 200, type: Admin })
-  @UseGuards(SuperAdminGuard)
+  // @UseGuards(SuperAdminGuard)
   @Get('all')
   findAll() {
     return this.adminService.findAllAdmin();
@@ -86,7 +86,7 @@ export class AdminController {
   @ApiOperation({ summary: 'Search Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
-  @UseGuards(SuperAdminGuard)
+  // @UseGuards(SuperAdminGuard)
   @Get('search')
   findAllFilter(
     @Query('name') name: string,
@@ -108,7 +108,7 @@ export class AdminController {
   @ApiOperation({ summary: 'Update by id by Admin' })
   @ApiResponse({ status: 201, type: Admin })
   @HttpCode(HttpStatus.OK)
-  @UseGuards(SuperAdminGuard)
+  // @UseGuards(SuperAdminGuard)
   @Put('update/:id')
   updateAdmin(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
     return this.adminService.updateYourself(+id, updateAdminDto);
@@ -117,7 +117,7 @@ export class AdminController {
   @ApiOperation({ summary: 'find One by Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
-  @UseGuards(SuperAdminGuard)
+  // @UseGuards(SuperAdminGuard)
   @Get('findOne/:id')
   findOne(@Param('id') id: string) {
     return this.adminService.findByAdmin(+id);
@@ -125,7 +125,7 @@ export class AdminController {
 
   @ApiOperation({ summary: 'delete by id by Admin' })
   @ApiResponse({ status: 200, type: NUMBER })
-  @UseGuards(SuperAdminGuard)
+  // @UseGuards(SuperAdminGuard)
   @Delete('remove/:id')
   remove(@Param('id') id: string) {
     return this.adminService.removeByAdmin(+id);
