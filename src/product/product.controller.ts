@@ -31,6 +31,17 @@ export class ProductController {
     return this.productService.createProduct(createProductDto);
   }
 
+  @ApiOperation({ summary: 'Search product' })
+  @Get('search')
+  search(
+    @Query('name') name: string,
+    @Query('price') price: string,
+    @Query('qr_code') qr_code: string,
+    @Query('brand') brand: string,
+  ) {
+    return this.productService.search({ name, price, qr_code, brand });
+  }
+
   @ApiOperation({ summary: 'View all products' })
   @ApiResponse({
     status: 200,
@@ -68,14 +79,5 @@ export class ProductController {
     return this.productService.updateById(+id, updateProductDto);
   }
 
-  @ApiOperation({ summary: 'Search product' })
-  @Get('search')
-  search(
-    @Query('name') name: string,
-    @Query('price') price: string,
-    @Query('qr_code') qr_code: string,
-    @Query('brand') brand: string,
-  ) {
-    return this.productService.search({ name, price, qr_code, brand });
-  }
+  
 }

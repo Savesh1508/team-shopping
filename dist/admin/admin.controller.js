@@ -22,7 +22,6 @@ const admin_model_1 = require("./models/admin.model");
 const login_admin_dto_1 = require("./dto/login-admin.dto");
 const sequelize_1 = require("sequelize");
 const cookieGetter_decorator_1 = require("../decorators/cookieGetter.decorator");
-const superAdmin_guard_1 = require("../guards/superAdmin.guard");
 const selfAdmin_guard_1 = require("../guards/selfAdmin.guard");
 let AdminController = class AdminController {
     constructor(adminService) {
@@ -107,7 +106,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'All Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: admin_model_1.Admin }),
-    (0, common_1.UseGuards)(superAdmin_guard_1.SuperAdminGuard),
     (0, common_1.Get)('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -117,7 +115,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Search Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: admin_model_1.Admin }),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.UseGuards)(superAdmin_guard_1.SuperAdminGuard),
     (0, common_1.Get)('search'),
     __param(0, (0, common_1.Query)('name')),
     __param(1, (0, common_1.Query)('last_name')),
@@ -142,7 +139,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update by id by Admin' }),
     (0, swagger_1.ApiResponse)({ status: 201, type: admin_model_1.Admin }),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.UseGuards)(superAdmin_guard_1.SuperAdminGuard),
     (0, common_1.Put)('update/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -154,7 +150,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'find One by Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: admin_model_1.Admin }),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.UseGuards)(superAdmin_guard_1.SuperAdminGuard),
     (0, common_1.Get)('findOne/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -164,7 +159,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'delete by id by Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: sequelize_1.NUMBER }),
-    (0, common_1.UseGuards)(superAdmin_guard_1.SuperAdminGuard),
     (0, common_1.Delete)('remove/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

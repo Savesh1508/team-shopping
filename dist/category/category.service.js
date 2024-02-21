@@ -32,10 +32,10 @@ let CategoryService = class CategoryService {
         return category;
     }
     async findAll() {
-        return this.categoryRepository.findAll();
+        return this.categoryRepository.findAll({ include: { all: true } });
     }
     async findById(id) {
-        const category = await this.categoryRepository.findByPk(id);
+        const category = await this.categoryRepository.findOne({ include: { all: true }, where: { id } });
         return category;
     }
     async deleteById(id) {

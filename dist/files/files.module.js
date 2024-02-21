@@ -9,11 +9,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FilesModule = void 0;
 const common_1 = require("@nestjs/common");
 const files_service_1 = require("./files.service");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let FilesModule = class FilesModule {
 };
 exports.FilesModule = FilesModule;
 exports.FilesModule = FilesModule = __decorate([
     (0, common_1.Module)({
+        imports: [serve_static_1.ServeStaticModule.forRoot({ rootPath: `${path_1.default}/static`, serveRoot: 'static' })],
         providers: [files_service_1.FilesService],
         exports: [files_service_1.FilesService],
     })

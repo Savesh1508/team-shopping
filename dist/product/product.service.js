@@ -46,6 +46,7 @@ let ProductService = class ProductService {
     }
     async search({ name, price, qr_code, brand }) {
         const where = {};
+        console.log(name, price);
         if (name) {
             where['name'] = {
                 [sequelize_2.Op.like]: `%${name}%`,
@@ -66,7 +67,7 @@ let ProductService = class ProductService {
                 [sequelize_2.Op.like]: `%${brand}%`,
             };
         }
-        const product = await product_model_1.Product.findAll({ where });
+        const product = await product_model_1.Product.findAll({ where, include: { all: true } });
         if (!product) {
             throw new common_1.BadRequestException('product not found');
         }
