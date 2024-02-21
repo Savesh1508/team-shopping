@@ -49,7 +49,8 @@ export class UserAddressController {
     description: 'UserAddress by Id',
     type: [UserAddress],
   })
-  // @UseGuards(selfClientGuard)
+  // @UseGuards(selfClientGuard)571632
+  
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<UserAddress> {
     return this.userAddressService.findOne(id);

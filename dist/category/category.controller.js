@@ -20,7 +20,6 @@ const create_category_dto_1 = require("./dto/create-category.dto");
 const swagger_1 = require("@nestjs/swagger");
 const category_model_1 = require("./models/category.model");
 const update_category_dto_1 = require("./dto/update-category.dto");
-const admin_guard_1 = require("../guards/admin.guard");
 let CategoryController = class CategoryController {
     constructor(categoryService) {
         this.categoryService = categoryService;
@@ -74,7 +73,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Category  edit' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Category by Id', type: [category_model_1.Category] }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -86,7 +84,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Image by id update ' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'update by id image', type: [common_1.Post] }),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Put)('file/:id'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image')),
     __param(0, (0, common_1.Param)('id')),
@@ -111,7 +108,6 @@ __decorate([
         description: 'Deleted Category',
         type: [category_model_1.Category],
     }),
-    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

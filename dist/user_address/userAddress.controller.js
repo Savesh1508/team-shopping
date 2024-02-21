@@ -19,8 +19,6 @@ const userAddress_service_1 = require("./userAddress.service");
 const create_userAddress_dto_1 = require("./dto/create-userAddress.dto");
 const swagger_1 = require("@nestjs/swagger");
 const update_userAddress_dto_1 = require("./dto/update-userAddress.dto");
-const selfClient_guard_1 = require("../guards/selfClient.guard");
-const selfAdmin_guard_1 = require("../guards/selfAdmin.guard");
 let UserAddressController = class UserAddressController {
     constructor(userAddressService) {
         this.userAddressService = userAddressService;
@@ -62,7 +60,6 @@ __decorate([
         description: 'List of UserAddress',
         type: [userAddress_model_1.UserAddress],
     }),
-    (0, common_1.UseGuards)(selfAdmin_guard_1.selfAdminGuard),
     (0, common_1.Get)('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -75,7 +72,6 @@ __decorate([
         description: 'UserAddress by Id',
         type: [userAddress_model_1.UserAddress],
     }),
-    (0, common_1.UseGuards)(selfClient_guard_1.selfClientGuard),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -89,7 +85,6 @@ __decorate([
         description: 'Updated UserAddress',
         type: [userAddress_model_1.UserAddress],
     }),
-    (0, common_1.UseGuards)(selfClient_guard_1.selfClientGuard),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -104,7 +99,6 @@ __decorate([
         description: 'Deleted UserAddress',
         type: [userAddress_model_1.UserAddress],
     }),
-    (0, common_1.UseGuards)(selfClient_guard_1.selfClientGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

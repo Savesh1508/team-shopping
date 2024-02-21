@@ -44,7 +44,8 @@ export class ProductService {
 
   async search({ name, price, qr_code, brand }) {
     const where = {};
-
+    console.log(name, price);
+    
     if (name) {
       where['name'] = {
         [Op.like]: `%${name}%`,
@@ -65,7 +66,7 @@ export class ProductService {
         [Op.like]: `%${brand}%`,
       };
     }
-    const product = await Product.findAll({ where });
+    const product = await Product.findAll({ where, include:{all:true} });
     if (!product) {
       throw new BadRequestException('product not found');
     }
