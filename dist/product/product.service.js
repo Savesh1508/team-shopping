@@ -26,11 +26,49 @@ let ProductService = class ProductService {
         console.log(product);
         return product;
     }
+    async limit_product(selectDto) {
+        const products = await this.productRepo.findAll({ include: { all: true } });
+        if (products.length === 0) {
+            return {
+                message: 'Product Not Found',
+                status: common_1.HttpStatus.NOT_FOUND,
+            };
+        }
+        let limit_products = [];
+        if (selectDto.sort === 1 || selectDto.sort < 1) {
+            let num = 0;
+            for (let index = num; index < num + selectDto.limit; index++) {
+                if (products[index] === undefined)
+                    break;
+                limit_products.push(products[index]);
+            }
+        }
+        else {
+            let num = (selectDto.sort - 1) * selectDto.limit;
+            for (let index = num; index < num + selectDto.limit; index++) {
+                if (products[index] === undefined)
+                    break;
+                limit_products.push(products[index]);
+            }
+        }
+        if (limit_products.length === 0)
+            return {
+                message: 'Products Not Found',
+                status: common_1.HttpStatus.NOT_FOUND,
+            };
+        return {
+            status: common_1.HttpStatus.OK,
+            limit_products,
+        };
+    }
     async findAll() {
         return this.productRepo.findAll({ include: { all: true } });
     }
     async findById(id) {
-        const product = await this.productRepo.findOne({ include: { all: true }, where: { id } });
+        const product = await this.productRepo.findOne({
+            include: { all: true },
+            where: { id },
+        });
         return product;
     }
     async deleteById(id) {

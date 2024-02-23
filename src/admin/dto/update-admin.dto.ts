@@ -25,12 +25,7 @@ export class UpdateAdminDto {
   @IsOptional()
   address?: string;
 
-  @ApiProperty({ example: 'Uzbek1$t0n', description: 'Admin paroli' })
-  @IsStrongPassword()
-  @MinLength(4)
-  @IsOptional()
-  password?: string;
-
+  
   @ApiProperty({ example: 'salima@mail.uz', description: 'Admin emaili' })
   @IsEmail()
   @IsOptional()
@@ -44,7 +39,7 @@ export class UpdateAdminDto {
   @IsOptional()
   phone?: string;
 
-  @ApiProperty({ example: true, description: 'Super admin bo\'lishi' })
+  @ApiProperty({ example: false, description: 'Super admin bo\'lishi' })
   @IsBoolean()
   @IsOptional()
   is_superAdmin?: boolean;

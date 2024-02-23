@@ -1,7 +1,9 @@
 import {
   BadRequestException,
   ForbiddenException,
+  HttpStatus,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -14,6 +16,7 @@ import { Op } from 'sequelize';
 import { Response } from 'express';
 import { LoginAdminDto } from './dto/login-admin.dto';
 import { UpdateAdminYourselfDto } from './dto/update-admin-yourself.dto';
+import { SelectDto } from './dto/select_limit.dto';
 
 @Injectable()
 export class AdminService {
@@ -81,6 +84,7 @@ export class AdminService {
     });
 
     const response = {
+      status: 201,
       message: 'User registered',
       user: updateAdmin[1][0],
       token,
@@ -154,6 +158,45 @@ export class AdminService {
     return response;
   }
 
+  async limit_admin(selectDto: SelectDto): Promise<Object> {
+    const admins = await this.adminRepo.findAll();
+
+    if (admins.length === 0) {
+      return {
+        message: 'Admin Not Found',
+        status: HttpStatus.NOT_FOUND,
+      };
+    }
+
+    let limit_admins = [];
+    if (selectDto.sort === 1 || selectDto.sort < 1) {
+      let num = 0;
+      for (let index = num; index < num + selectDto.limit; index++) {
+        if (admins[index] === undefined) break;
+
+        limit_admins.push(admins[index]);
+      }
+    } else {
+      let num = (selectDto.sort - 1) * selectDto.limit;
+      for (let index = num; index < num + selectDto.limit; index++) {
+        if (admins[index] === undefined) break;
+
+        limit_admins.push(admins[index]);
+      }
+    }
+
+    if (limit_admins.length === 0)
+      return {
+        message: 'Admins Not Found',
+        status: HttpStatus.NOT_FOUND,
+      };
+
+    return {
+      status: HttpStatus.OK,
+      limit_admins,
+    };
+  }
+
   async SearchAdmin({ name, last_name, email }) {
     let where = {};
 
@@ -169,8 +212,11 @@ export class AdminService {
       where['last_name'] = { [Op.like]: `%${last_name}%` };
     }
 
-    const admin = await this.adminRepo.findAll({ where });
-    if (!admin) {
+    const admin = await this.adminRepo.findAll({
+      where,
+      order: [['createdAt', 'ASC']],
+    });
+    if (!admin || admin.length == 0) {
       throw new BadRequestException('admin not found');
     }
 
@@ -181,13 +227,8 @@ export class AdminService {
     id: number,
     updateAdminYourselfDto: UpdateAdminYourselfDto,
   ) {
-    const hashed_password = await bcrypt.hash(
-      updateAdminYourselfDto.password,
-      7,
-    );
-
     const admin = await this.adminRepo.update(
-      { ...updateAdminYourselfDto, password: hashed_password },
+      { ...updateAdminYourselfDto },
       {
         where: { id },
         returning: true,
@@ -201,10 +242,8 @@ export class AdminService {
   }
 
   async updateByAdmin(id: number, updateAdminDto: UpdateAdminDto) {
-    const hashed_password = await bcrypt.hash(updateAdminDto.password, 7);
-
     const admin = await this.adminRepo.update(
-      { ...updateAdminDto, password: hashed_password },
+      { ...updateAdminDto },
       {
         where: { id },
         returning: true,
@@ -270,14 +309,30 @@ export class AdminService {
   }
 
   async findAllAdmin() {
-    return this.adminRepo.findAll();
+    return this.adminRepo.findAll({ order: [['createdAt', 'DESC']] });
+  }
+
+  async findByYourself(id: number) {
+    // const AdminData = await this.jwtService.verify(access_token, {
+    //   secret: process.env.ACCESS_TOKEN_KEY,
+    // });
+    const admin = await this.adminRepo.findByPk(id);
+    if (!admin) {
+      throw new BadRequestException('Admin not found');
+    }
+    return admin;
   }
 
   async removeByAdmin(id: number) {
     const admin = await this.adminRepo.findByPk(id);
     if (!admin) {
-      throw new BadRequestException('Admin not found');
+      throw new NotFoundException('Admin not found');
     }
-    return this.adminRepo.destroy({ where: { id } });
+    const removeAdmin = await this.adminRepo.destroy({ where: { id } });
+    const response = {
+      removeAdmin,
+      status: 204,
+    };
+    return response;
   }
 }

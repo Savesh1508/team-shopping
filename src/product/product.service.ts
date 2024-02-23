@@ -1,9 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Product } from './models/product.model';
 import { Op } from 'sequelize';
+import { SelectDto } from '../admin/dto/select_limit.dto';
 
 @Injectable()
 export class ProductService {
@@ -12,8 +13,47 @@ export class ProductService {
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     const product = await this.productRepo.create(createProductDto);
     console.log(product);
-    
+
     return product;
+  }
+
+  async limit_product(selectDto: SelectDto): Promise<Object> {
+    const products = await this.productRepo.findAll({ include: { all: true } });
+
+    if (products.length === 0) {
+      return {
+        message: 'Product Not Found',
+        status: HttpStatus.NOT_FOUND,
+      };
+    }
+
+    let limit_products = [];
+    if (selectDto.sort === 1 || selectDto.sort < 1) {
+      let num = 0;
+      for (let index = num; index < num + selectDto.limit; index++) {
+        if (products[index] === undefined) break;
+
+        limit_products.push(products[index]);
+      }
+    } else {
+      let num = (selectDto.sort - 1) * selectDto.limit;
+      for (let index = num; index < num + selectDto.limit; index++) {
+        if (products[index] === undefined) break;
+
+        limit_products.push(products[index]);
+      }
+    }
+
+    if (limit_products.length === 0)
+      return {
+        message: 'Products Not Found',
+        status: HttpStatus.NOT_FOUND,
+      };
+
+    return {
+      status: HttpStatus.OK,
+      limit_products,
+    };
   }
 
   async findAll(): Promise<Product[]> {
@@ -21,7 +61,10 @@ export class ProductService {
   }
 
   async findById(id: number): Promise<Product> {
-    const product = await this.productRepo.findOne({include:{all:true}, where:{id}});
+    const product = await this.productRepo.findOne({
+      include: { all: true },
+      where: { id },
+    });
     return product;
   }
 
@@ -45,7 +88,7 @@ export class ProductService {
   async search({ name, price, qr_code, brand }) {
     const where = {};
     console.log(name, price);
-    
+
     if (name) {
       where['name'] = {
         [Op.like]: `%${name}%`,
@@ -66,7 +109,7 @@ export class ProductService {
         [Op.like]: `%${brand}%`,
       };
     }
-    const product = await Product.findAll({ where, include:{all:true} });
+    const product = await Product.findAll({ where, include: { all: true } });
     if (!product) {
       throw new BadRequestException('product not found');
     }

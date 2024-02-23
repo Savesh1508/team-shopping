@@ -34,13 +34,6 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateAdminDto.prototype, "address", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Uzbek1$t0n', description: 'Admin paroli' }),
-    (0, class_validator_1.IsStrongPassword)(),
-    (0, class_validator_1.MinLength)(4),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], UpdateAdminDto.prototype, "password", void 0);
-__decorate([
     (0, swagger_1.ApiProperty)({ example: 'salima@mail.uz', description: 'Admin emaili' }),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.IsOptional)(),
@@ -56,7 +49,7 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateAdminDto.prototype, "phone", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: true, description: 'Super admin bo\'lishi' }),
+    (0, swagger_1.ApiProperty)({ example: false, description: 'Super admin bo\'lishi' }),
     (0, class_validator_1.IsBoolean)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)

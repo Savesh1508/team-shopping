@@ -19,6 +19,8 @@ const product_service_1 = require("./product.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const product_model_1 = require("./models/product.model");
 const update_product_dto_1 = require("./dto/update-product.dto");
+const admin_guard_1 = require("../guards/admin.guard");
+const select_limit_dto_1 = require("../admin/dto/select_limit.dto");
 let ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
@@ -28,6 +30,9 @@ let ProductController = class ProductController {
     }
     search(name, price, qr_code, brand) {
         return this.productService.search({ name, price, qr_code, brand });
+    }
+    select_limit_product(selectDto) {
+        return this.productService.limit_product(selectDto);
     }
     async findAll() {
         return this.productService.findAll();
@@ -46,6 +51,7 @@ exports.ProductController = ProductController;
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Add Product' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'New  Product', type: [product_model_1.Product] }),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -63,6 +69,15 @@ __decorate([
     __metadata("design:paramtypes", [String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], ProductController.prototype, "search", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Find limited products' }),
+    (0, swagger_1.ApiResponse)({ status: 200, type: [product_model_1.Product] }),
+    (0, common_1.Post)('limit/product'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [select_limit_dto_1.SelectDto]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "select_limit_product", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'View all products' }),
     (0, swagger_1.ApiResponse)({
@@ -87,6 +102,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete Product' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Deleted Product', type: [product_model_1.Product] }),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -96,6 +112,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Product edit' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Updated Product', type: [product_model_1.Product] }),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),

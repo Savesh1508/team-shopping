@@ -24,11 +24,6 @@ export class UpdateAdminYourselfDto {
   @IsOptional()
   address?: string;
 
-  @ApiProperty({ example: 'Uzbek1$t0n', description: 'Admin paroli' })
-  @IsStrongPassword()
-  @MinLength(4)
-  @IsOptional()
-  password?: string;
 
   @ApiProperty({ example: 'salima@mail.uz', description: 'Admin emaili' })
   @IsEmail()

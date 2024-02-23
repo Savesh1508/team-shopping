@@ -15,6 +15,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './models/product.model';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { AdminGuard } from '../guards/admin.guard';
+import { SelectDto } from '../admin/dto/select_limit.dto';
 
 @ApiTags('Product')
 @Controller('product')
@@ -23,7 +24,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Add Product' })
   @ApiResponse({ status: 200, description: 'New  Product', type: [Product] })
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @Post('create')
   async createProduct(
     @Body() createProductDto: CreateProductDto,
@@ -40,6 +41,16 @@ export class ProductController {
     @Query('brand') brand: string,
   ) {
     return this.productService.search({ name, price, qr_code, brand });
+  }
+
+  
+  @ApiOperation({summary: 'Find limited products'})
+  @ApiResponse({status: 200, type: [Product]})
+  @Post('limit/product')
+  select_limit_product(
+    @Body() selectDto: SelectDto
+  ): Promise<Object> {
+    return this.productService.limit_product(selectDto);
   }
 
   @ApiOperation({ summary: 'View all products' })
@@ -62,7 +73,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Delete Product' })
   @ApiResponse({ status: 200, description: 'Deleted Product', type: [Product] })
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<number> {
     return this.productService.deleteById(+id);
@@ -70,7 +81,7 @@ export class ProductController {
 
   @ApiOperation({ summary: 'Product edit' })
   @ApiResponse({ status: 200, description: 'Updated Product', type: [Product] })
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @Put(':id')
   async updateById(
     @Param('id') id: string,

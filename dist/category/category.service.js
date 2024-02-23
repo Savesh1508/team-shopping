@@ -31,6 +31,41 @@ let CategoryService = class CategoryService {
         });
         return category;
     }
+    async limit_category(selectDto) {
+        const categories = await this.categoryRepository.findAll({ include: { all: true } });
+        if (categories.length === 0) {
+            return {
+                message: 'Category Not Found',
+                status: common_1.HttpStatus.NOT_FOUND,
+            };
+        }
+        let limit_categories = [];
+        if (selectDto.sort === 1 || selectDto.sort < 1) {
+            let num = 0;
+            for (let index = num; index < num + selectDto.limit; index++) {
+                if (categories[index] === undefined)
+                    break;
+                limit_categories.push(categories[index]);
+            }
+        }
+        else {
+            let num = (selectDto.sort - 1) * selectDto.limit;
+            for (let index = num; index < num + selectDto.limit; index++) {
+                if (categories[index] === undefined)
+                    break;
+                limit_categories.push(categories[index]);
+            }
+        }
+        if (limit_categories.length === 0)
+            return {
+                message: 'Category Not Found',
+                status: common_1.HttpStatus.NOT_FOUND,
+            };
+        return {
+            status: common_1.HttpStatus.OK,
+            limit_categories,
+        };
+    }
     async findAll() {
         return this.categoryRepository.findAll({ include: { all: true } });
     }

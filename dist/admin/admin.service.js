@@ -70,6 +70,7 @@ let AdminService = class AdminService {
             httpOnly: true,
         });
         const response = {
+            status: 201,
             message: 'User registered',
             user: updateAdmin[1][0],
             token,
@@ -120,6 +121,41 @@ let AdminService = class AdminService {
         };
         return response;
     }
+    async limit_admin(selectDto) {
+        const admins = await this.adminRepo.findAll();
+        if (admins.length === 0) {
+            return {
+                message: 'Admin Not Found',
+                status: common_1.HttpStatus.NOT_FOUND,
+            };
+        }
+        let limit_admins = [];
+        if (selectDto.sort === 1 || selectDto.sort < 1) {
+            let num = 0;
+            for (let index = num; index < num + selectDto.limit; index++) {
+                if (admins[index] === undefined)
+                    break;
+                limit_admins.push(admins[index]);
+            }
+        }
+        else {
+            let num = (selectDto.sort - 1) * selectDto.limit;
+            for (let index = num; index < num + selectDto.limit; index++) {
+                if (admins[index] === undefined)
+                    break;
+                limit_admins.push(admins[index]);
+            }
+        }
+        if (limit_admins.length === 0)
+            return {
+                message: 'Admins Not Found',
+                status: common_1.HttpStatus.NOT_FOUND,
+            };
+        return {
+            status: common_1.HttpStatus.OK,
+            limit_admins,
+        };
+    }
     async SearchAdmin({ name, last_name, email }) {
         let where = {};
         if (name) {
@@ -131,15 +167,17 @@ let AdminService = class AdminService {
         if (last_name) {
             where['last_name'] = { [sequelize_2.Op.like]: `%${last_name}%` };
         }
-        const admin = await this.adminRepo.findAll({ where });
-        if (!admin) {
+        const admin = await this.adminRepo.findAll({
+            where,
+            order: [['createdAt', 'ASC']],
+        });
+        if (!admin || admin.length == 0) {
             throw new common_1.BadRequestException('admin not found');
         }
         return admin;
     }
     async updateYourself(id, updateAdminYourselfDto) {
-        const hashed_password = await bcrypt.hash(updateAdminYourselfDto.password, 7);
-        const admin = await this.adminRepo.update({ ...updateAdminYourselfDto, password: hashed_password }, {
+        const admin = await this.adminRepo.update({ ...updateAdminYourselfDto }, {
             where: { id },
             returning: true,
         });
@@ -149,8 +187,7 @@ let AdminService = class AdminService {
         return admin;
     }
     async updateByAdmin(id, updateAdminDto) {
-        const hashed_password = await bcrypt.hash(updateAdminDto.password, 7);
-        const admin = await this.adminRepo.update({ ...updateAdminDto, password: hashed_password }, {
+        const admin = await this.adminRepo.update({ ...updateAdminDto }, {
             where: { id },
             returning: true,
         });
@@ -196,14 +233,26 @@ let AdminService = class AdminService {
         return admin;
     }
     async findAllAdmin() {
-        return this.adminRepo.findAll();
+        return this.adminRepo.findAll({ order: [['createdAt', 'DESC']] });
     }
-    async removeByAdmin(id) {
+    async findByYourself(id) {
         const admin = await this.adminRepo.findByPk(id);
         if (!admin) {
             throw new common_1.BadRequestException('Admin not found');
         }
-        return this.adminRepo.destroy({ where: { id } });
+        return admin;
+    }
+    async removeByAdmin(id) {
+        const admin = await this.adminRepo.findByPk(id);
+        if (!admin) {
+            throw new common_1.NotFoundException('Admin not found');
+        }
+        const removeAdmin = await this.adminRepo.destroy({ where: { id } });
+        const response = {
+            removeAdmin,
+            status: 204,
+        };
+        return response;
     }
 };
 exports.AdminService = AdminService;

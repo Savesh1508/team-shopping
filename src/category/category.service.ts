@@ -10,6 +10,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Category } from './models/category.model';
 import { FilesService } from '../files/files.service';
 import { Op } from 'sequelize';
+import { SelectDto } from '../admin/dto/select_limit.dto';
 
 @Injectable()
 export class CategoryService {
@@ -25,6 +26,46 @@ export class CategoryService {
       image: fileName,
     });
     return category;
+  }
+
+  
+  async limit_category(selectDto: SelectDto): Promise<Object> {
+    const categories = await this.categoryRepository.findAll({include:{all:true}});
+
+    if (categories.length === 0) {
+      return {
+        message: 'Category Not Found',
+        status: HttpStatus.NOT_FOUND,
+      };
+    }
+
+    let limit_categories = [];
+    if (selectDto.sort === 1 || selectDto.sort < 1) {
+      let num = 0;
+      for (let index = num; index < num + selectDto.limit; index++) {
+        if (categories[index] === undefined) break;
+
+        limit_categories.push(categories[index]);
+      }
+    } else {
+      let num = (selectDto.sort - 1) * selectDto.limit;
+      for (let index = num; index < num + selectDto.limit; index++) {
+        if (categories[index] === undefined) break;
+
+        limit_categories.push(categories[index]);
+      }
+    }
+
+    if (limit_categories.length === 0)
+      return {
+        message: 'Category Not Found',
+        status: HttpStatus.NOT_FOUND,
+      };
+
+    return {
+      status: HttpStatus.OK,
+      limit_categories,
+    };
   }
 
   async findAll(): Promise<Category[]> {
